@@ -6,7 +6,7 @@ export const sectionBase = css`
   :host {
     display: block;
     padding: var(--space-3xl) var(--space-lg);
-    scroll-margin-top: 4rem;
+    scroll-margin-top: var(--header-offset);
   }
 
   .container {

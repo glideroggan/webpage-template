@@ -12,8 +12,9 @@ FAST Element (web components). Page copy is Swedish placeholder text.
 | `npm run build` | Clean, type-check, bundle into `dist/` |
 | `npm run typecheck` | `tsc --noEmit` only |
 | `npm run screens` | Screenshots of `dist/` into `screens/` (build first) |
+| `npm run check:links` | Playwright check on `dist/`: nav links, hero buttons and a direct `/#contact` load scroll to their section (build first) |
 
-Done means `npm run build` passes.
+Done means `npm run build` passes, and `npm run check:links` too when you touched navigation or `app-root`.
 
 ## Layout
 
@@ -54,12 +55,12 @@ src/components/<name>/styles.ts     CSS
 5. **Change an array by assigning a new one** (`this.items = [...]`). `push` and `splice` do not notify FAST.
 6. **Every event handler in a template must return `true`** unless it deliberately blocks the default
    behaviour. FAST calls `preventDefault()` on any other return value, `undefined` included, which breaks
-   links, checkboxes and typing. A button that must not submit a form may return `false`, with a comment saying why.
+   links, checkboxes and typing. A handler that deliberately blocks the default may return `false`, with a comment saying why.
 7. **Form inputs that are cleared from code use property bindings** (`:value="${x => x.name}"`), not the
    `value=` attribute, which is only read once.
 8. **`<form @submit>` is unreliable in shadow DOM**: use `type="button"` plus `@click` (see `contact-section`).
 9. **State is `@observable` (or `@attr` for values set from HTML)**. Plain fields do not update the view.
-10. **Hash links need the `id` on the host element** (`<services-section id="services">`), not inside the shadow DOM.
+10. **Hash links are resolved by `app-root`.** The sections live inside its shadow root, where the browser's #fragment lookup does not search, so `app-root/index.ts` scrolls to the id on `hashchange` and on load. Put the `id` on the section's host element (`<services-section id="services">`) in `app-root/template.ts`; never rely on native anchor scrolling. `npm run check:links` verifies it.
 11. Components are shadow DOM. Global CSS does not reach in; tokens (custom properties) do.
 
 ## Styling rules

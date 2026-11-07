@@ -10,14 +10,14 @@ export const styles = [
       padding: 0;
       display: grid;
       gap: var(--space-lg);
-      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
     }
 
     .case {
       padding: var(--space-lg);
       background: var(--bg-surface);
       border: 1px solid var(--border-base);
-      border-top: 4px solid var(--accent-primary);
+      border-top: var(--border-accent) solid var(--accent-primary);
       border-radius: var(--radius-lg);
     }
 

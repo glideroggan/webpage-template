@@ -9,7 +9,8 @@
     "build": "npm run clean && npm run typecheck && node ./build.mjs",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "typecheck": "tsc --noEmit",
-    "screens": "node ./screenshots.mjs"
+    "screens": "node ./screenshots.mjs",
+    "check:links": "node ./check-links.mjs"
   },
   "dependencies": {
     "@microsoft/fast-element": "^2.1.0"

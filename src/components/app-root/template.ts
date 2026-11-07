@@ -2,8 +2,8 @@ import { html, repeat } from '@microsoft/fast-element';
 import type { NavLink } from '../../content';
 import type { AppRoot } from './index';
 
-// The page is this list of sections, top to bottom. The id sits on the host element
-// (not inside the section's shadow DOM) so the nav's #anchor links can find it.
+// The page is this list of sections, top to bottom. The id sits on the section's host element;
+// app-root scrolls to it on hashchange, because the browser's #anchor lookup does not search shadow roots.
 export const template = html<AppRoot>/*html*/`
   <header class="header">
     <div class="bar">

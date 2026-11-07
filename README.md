@@ -17,6 +17,9 @@ npm run build    # type-check and bundle into dist/
 `npm run screens` writes screenshots of `dist/` to `screens/` (375 and 1280 px, light and dark). It needs a
 Chromium for Playwright: `npx playwright install chromium`.
 
+`npm run check:links` loads `dist/` in Chromium and checks that the menu links, the hero buttons and a direct
+`/#contact` load scroll to their section (build first).
+
 ## How it fits together
 
 ```mermaid

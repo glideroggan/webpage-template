@@ -28,7 +28,6 @@ export class ContactSection extends FASTElement {
     this.name = '';
     this.email = '';
     this.message = '';
-    // false on purpose: the click must not trigger a native form submit.
-    return false;
+    return true;
   }
 }

@@ -12,7 +12,7 @@ export const styles = [
       padding: 0;
       display: grid;
       gap: var(--space-lg);
-      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
     }
 
     .card {
@@ -49,8 +49,8 @@ export const styles = [
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 2.25rem;
-      height: 2.25rem;
+      width: var(--badge-size);
+      height: var(--badge-size);
       margin-bottom: var(--space-md);
       border-radius: 50%;
       background: var(--accent-strong);
