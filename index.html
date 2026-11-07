@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ert företag - startsida</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--bg-app);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /*
+     * Design tokens. Components never hard-code a colour, size or font: they read these
+     * custom properties, which cross shadow DOM boundaries. Re-theme by editing this block only.
+     */
+    :root {
+      color-scheme: light dark;
+
+      /* Typography */
+      --font-heading: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+      --font-body: 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.75rem;
+      --text-3xl: 2.25rem;
+      --text-hero: clamp(2rem, 6vw, 3.5rem);
+
+      /* Spacing */
+      --space-2xs: 0.25rem;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 5rem;
+      --content-width: 72rem;
+
+      /* Shape and motion */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.12);
+      --transition-fast: 150ms ease;
+
+      /* Surfaces (light) */
+      --bg-app: #f4faf9;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #e6f4f2;
+      --border-base: #d3e4e1;
+      --border-strong: #a9c7c3;
+
+      /* Text (light). --text-muted is at least 4.5:1 on every light surface. */
+      --text-primary: #0f1f1d;
+      --text-secondary: #34494a;
+      --text-muted: #4c6360;
+      --text-inverse: #ffffff;
+
+      /*
+       * Brand teal. --accent-primary is the pure brand colour #009D90: use it for large
+       * shapes, borders and icons only. White text on it is about 3.4:1, which fails for
+       * small text, so small text and button fills use --accent-strong / --accent-text.
+       */
+      --accent-primary: #009d90;
+      --accent-strong: #00695f;
+      --accent-strong-hover: #00544c;
+      --accent-text: #00695f;
+      --accent-on-strong: #ffffff;
+      --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 45%, transparent);
+
+      --hero-gradient: linear-gradient(135deg, #e6f4f2 0%, #f4faf9 60%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-app: #0b1514;
+        --bg-surface: #121f1e;
+        --bg-surface-alt: #0f2b28;
+        --border-base: #223836;
+        --border-strong: #35524f;
+
+        --text-primary: #e9f3f2;
+        --text-secondary: #bdd0ce;
+        --text-muted: #94adaa;
+        --text-inverse: #04120f;
+
+        --accent-strong: #009d90;
+        --accent-strong-hover: #12b3a5;
+        --accent-text: #3fd1c3;
+        --accent-on-strong: #04120f;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.55);
+        --hero-gradient: linear-gradient(135deg, #0f2b28 0%, #0b1514 60%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <app-root></app-root>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
