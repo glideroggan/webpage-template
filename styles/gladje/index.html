@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup D: Glädje</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fffaf2;
+    --ink: #13201e;
+    --ink-soft: #4a5654;
+    --teal: #009d90;
+    --teal-ink: #00695f;
+    --mint: #c9f0ea;
+    --sun: #ffd166;
+    --coral: #ff7a66;
+    --lilac: #cdb8ff;
+    --card: #ffffff;
+    --font-heading: 'Montserrat', system-ui, sans-serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --border: 3px solid var(--ink);
+    --shadow: 6px 6px 0 var(--ink);
+  }
+  * { box-sizing: border-box; }
+  .page { overflow: hidden; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--font-body); }
+  .wrap { max-width: 74rem; margin: 0 auto; padding: 0 1.5rem; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
+  .brand { font: 900 1.7rem/1 var(--font-heading); letter-spacing: -.03em; }
+  .brand b { display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: var(--teal); margin-left: .08em; }
+  nav { display: flex; gap: .6rem; }
+  nav a { font: 700 .85rem/1 var(--font-heading); color: var(--ink); text-decoration: none; padding: .6rem 1rem; border: var(--border); border-radius: var(--radius-pill); background: var(--card); }
+  nav a:hover, nav a:focus-visible { background: var(--sun); outline: none; }
+
+  /* Hero with the brand dot as giant shapes */
+  .hero { position: relative; padding: 3.5rem 0 5rem; }
+  .blob { position: absolute; border-radius: 50%; z-index: -1; }
+  .blob.one { width: 26rem; height: 26rem; background: var(--mint); right: -6rem; top: -2rem; }
+  .blob.two { width: 9rem; height: 9rem; background: var(--sun); right: 22rem; top: 15rem; }
+  .blob.three { width: 4rem; height: 4rem; background: var(--coral); right: 4rem; top: 22rem; }
+  .hero h1 { font: 900 clamp(2.6rem, 7.4vw, 6rem)/1.08 var(--font-heading); letter-spacing: -.04em; margin: 0; max-width: 14ch; }
+  .hero h1 .hl { background: var(--sun); padding: 0 .15em; border-radius: .2em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .hero p { font-size: 1.2rem; color: var(--ink-soft); max-width: 32rem; margin: 1.4rem 0 0; }
+  .btn { display: inline-block; margin-top: 1.8rem; padding: 1rem 1.6rem; border: var(--border); border-radius: var(--radius-pill); background: var(--teal-ink); color: #fff; font: 900 .95rem/1 var(--font-heading); text-decoration: none; box-shadow: var(--shadow); transition: transform .1s, box-shadow .1s; }
+  .btn:hover { transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--ink); }
+  .btn:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+  .btn.alt { background: var(--card); color: var(--ink); margin-left: .8rem; }
+  .stickers { display: flex; gap: .7rem; flex-wrap: wrap; margin-top: 2.4rem; }
+  .sticker { font: 700 .85rem/1 var(--font-heading); padding: .55rem .9rem; border: var(--border); border-radius: var(--radius-pill); }
+  .sticker:nth-child(1) { background: var(--mint); transform: rotate(-3deg); }
+  .sticker:nth-child(2) { background: var(--lilac); transform: rotate(2deg); }
+  .sticker:nth-child(3) { background: var(--coral); transform: rotate(-1deg); }
+  .sticker:nth-child(4) { background: var(--sun); transform: rotate(3deg); }
+
+  /* Marquee strip */
+  .strip { background: var(--ink); color: var(--bg); font: 900 1.4rem/1 var(--font-heading); white-space: nowrap; overflow: hidden; padding: 1rem 0; transform: rotate(-1.5deg); margin: 0 -2rem; }
+  .strip span { margin-right: 2rem; }
+  .strip i { font-style: normal; color: var(--sun); margin-right: 2rem; }
+
+  /* Values / services as chunky cards */
+  section.block { padding: 5rem 0 1rem; }
+  h2 { font: 900 clamp(2rem, 4.4vw, 3.4rem)/1.02 var(--font-heading); letter-spacing: -.03em; margin: 0 0 2rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.4rem; }
+  .card { border: var(--border); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); background: var(--card); }
+  .card .ico { width: 3.4rem; height: 3.4rem; border-radius: 50%; border: var(--border); display: grid; place-items: center; font: 900 1.3rem/1 var(--font-heading); margin-bottom: 1rem; }
+  .card:nth-child(1) .ico { background: var(--mint); }
+  .card:nth-child(2) .ico { background: var(--sun); }
+  .card:nth-child(3) .ico { background: var(--lilac); }
+  .card h3 { font: 900 1.4rem/1.15 var(--font-heading); margin: 0 0 .4rem; }
+  .card p { margin: 0; color: var(--ink-soft); }
+
+  /* Quiz for recruiting */
+  .quiz { margin-top: 5rem; background: var(--teal); border: var(--border); border-radius: var(--radius-lg); padding: 2.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; box-shadow: var(--shadow); color: #04120f; }
+  .quiz h2 { margin: 0 0 .6rem; color: #04120f; }
+  .quiz ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+  .quiz li { background: var(--card); border: var(--border); border-radius: 16px; padding: .8rem 1rem; display: flex; gap: .8rem; align-items: center; font-weight: 600; }
+  .quiz li::before { content: ''; flex: none; width: 1.3rem; height: 1.3rem; border: var(--border); border-radius: 6px; background: var(--sun); }
+  .quiz .btn { background: var(--ink); }
+
+  /* Team as round faces */
+  .faces { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1.6rem; text-align: center; }
+  .face .av { width: 8rem; height: 8rem; margin: 0 auto .8rem; border-radius: 50%; border: var(--border); display: grid; place-items: center; font: 900 2rem/1 var(--font-heading); }
+  .face:nth-child(1) .av { background: var(--mint); } .face:nth-child(2) .av { background: var(--sun); }
+  .face:nth-child(3) .av { background: var(--lilac); } .face:nth-child(4) .av { background: var(--coral); }
+  .face b { font-family: var(--font-heading); display: block; }
+  .face span { color: var(--ink-soft); font-size: .9rem; }
+
+  /* Contact as a big speech bubble */
+  .bubble { margin: 5rem 0 3rem; position: relative; background: var(--sun); border: var(--border); border-radius: var(--radius-lg); padding: 2.6rem; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem; }
+  .bubble::after { content: ''; position: absolute; left: 3rem; bottom: -1.6rem; width: 2.6rem; height: 2.6rem; background: var(--sun); border-right: var(--border); border-bottom: var(--border); transform: rotate(45deg); }
+  .bubble h2 { margin: 0; }
+  .bubble label { display: block; font: 700 .85rem/1 var(--font-heading); margin: 1rem 0 .35rem; }
+  .bubble label:first-child { margin-top: 0; }
+  .bubble input, .bubble textarea { width: 100%; border: var(--border); border-radius: 14px; padding: .7rem .9rem; font: inherit; background: var(--card); }
+  .bubble input:focus-visible, .bubble textarea:focus-visible { outline: 3px solid var(--teal-ink); outline-offset: 2px; }
+  footer { text-align: center; padding: 2rem 0 2.5rem; font-weight: 600; color: var(--ink-soft); }
+
+  @media (max-width: 760px) {
+    nav a:not(:last-child) { display: none; }
+    .blob.one { width: 16rem; height: 16rem; right: -7rem; top: -3rem; }
+    .blob.two { width: 5rem; height: 5rem; right: 1rem; top: auto; bottom: 1rem; }
+    .blob.three { display: none; }
+    .btn.alt { margin-left: 0; }
+    .quiz, .bubble { grid-template-columns: 1fr; padding: 1.6rem; }
+    .strip { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body><div class="page">
+  <div class="wrap">
+    <header><div class="brand">ert företag<b></b></div><nav><a href="#tjanster">Tjänster</a><a href="#jobba">Jobba här</a><a href="#kontakt">Kontakt</a></nav></header>
+    <section class="hero">
+      <div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
+      <h1>Vi gör kod som gör <span class="hl">vardagen</span> lite roligare.</h1>
+      <p>En platshållare för ingressen: ett glädjestyrt konsultbolag inom utveckling, test och data.</p>
+      <a class="btn" href="#kontakt">Säg hej!</a><a class="btn alt" href="#jobba">Bli en av oss</a>
+      <div class="stickers"><span class="sticker">.NET</span><span class="sticker">Java</span><span class="sticker">Test</span><span class="sticker">AI</span></div>
+    </section>
+  </div>
+
+  <div class="strip" aria-hidden="true"><span>Utveckling</span><i>●</i><span>Test</span><i>●</i><span>Data</span><i>●</i><span>Frontend</span><i>●</i><span>Agilt ledarskap</span><i>●</i><span>Utveckling</span><i>●</i><span>Test</span><i>●</i><span>Data</span></div>
+
+  <div class="wrap">
+    <section class="block" id="tjanster">
+      <h2>Det här är vi bra på</h2>
+      <div class="cards">
+        <div class="card"><div class="ico">{}</div><h3>Systemutveckling</h3><p>En eller två meningar om tjänsten.</p></div>
+        <div class="card"><div class="ico">✓</div><h3>Test</h3><p>En eller två meningar om tjänsten.</p></div>
+        <div class="card"><div class="ico">▲</div><h3>Data och AI</h3><p>En eller två meningar om tjänsten.</p></div>
+      </div>
+    </section>
+
+    <section class="quiz" id="jobba">
+      <div><h2>Passar du här?</h2><p>Bocka för minst ett påstående, så har vi något att prata om. Platshållartext.</p><a class="btn" href="#kontakt">Läs mer</a></div>
+      <ul><li>Jag vill välja mina uppdrag själv.</li><li>Jag vill bestämma över min lön och semester.</li><li>Jag gillar kollegor som reser ihop.</li><li>Jag vill lära mig nya saker varje år.</li></ul>
+    </section>
+
+    <section class="block">
+      <h2>Några av oss</h2>
+      <div class="faces">
+        <div class="face"><div class="av">F</div><b>Förnamn E.</b><span>Roll eller titel</span></div>
+        <div class="face"><div class="av">F</div><b>Förnamn E.</b><span>Roll eller titel</span></div>
+        <div class="face"><div class="av">F</div><b>Förnamn E.</b><span>Roll eller titel</span></div>
+        <div class="face"><div class="av">F</div><b>Förnamn E.</b><span>Roll eller titel</span></div>
+      </div>
+    </section>
+
+    <section class="bubble" id="kontakt">
+      <div><h2>Säg hej!</h2><p>En mening om att ni svarar snabbt. Det här är en mockup, inget skickas.</p></div>
+      <div>
+        <label for="n">Namn</label><input id="n">
+        <label for="e">E-post</label><input id="e">
+        <label for="m">Meddelande</label><textarea id="m" rows="3"></textarea>
+        <a class="btn" href="#kontakt">Skicka</a>
+      </div>
+    </section>
+  </div>
+  <footer>Ert företag · Platshållartext · Mockup D</footer>
+</div></body>
+</html>

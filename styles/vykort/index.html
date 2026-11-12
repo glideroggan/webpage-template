@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup B: Vykort</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&family=Open+Sans:wght@400;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f4ecdf;
+    --sand-deep: #e8dcc8;
+    --sea: #009d90;
+    --sea-deep: #00695f;
+    --night: #12303a;
+    --sun: #f2b84b;
+    --coral: #e86a4f;
+    --ink: #1e2a2e;
+    --ink-soft: #4f5d61;
+    --card: #fffdf8;
+    --font-heading: 'Montserrat', system-ui, sans-serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --font-hand: 'Caveat', cursive;
+    --radius: 6px;
+    --shadow: 0 10px 30px rgba(18, 48, 58, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--sand); color: var(--ink); font: 400 1rem/1.6 var(--font-body); }
+  .wrap { max-width: 74rem; margin: 0 auto; padding: 0 1.5rem; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
+  .brand { font: 900 1.6rem/1 var(--font-heading); color: var(--sea-deep); letter-spacing: -.02em; }
+  .brand::after { content: '.'; color: var(--coral); }
+  nav { display: flex; gap: 1.5rem; font: 600 .85rem/1 var(--font-heading); text-transform: uppercase; letter-spacing: .08em; }
+  nav a { color: var(--ink); text-decoration: none; }
+
+  /* Hero: a scrapbook of postcards over a big headline */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; padding: 3rem 0 5rem; }
+  .hero h1 { font: 900 clamp(2.4rem, 5.6vw, 4.4rem)/1.02 var(--font-heading); letter-spacing: -.03em; margin: 0 0 1rem; }
+  .hero h1 .hand { display: block; font: 600 clamp(2rem, 4vw, 3rem)/1 var(--font-hand); color: var(--coral); letter-spacing: 0; transform: rotate(-3deg); margin-top: .4rem; }
+  .hero p { font-size: 1.15rem; color: var(--ink-soft); max-width: 30rem; }
+  .btn { display: inline-block; margin-top: 1.2rem; padding: .95rem 1.7rem; border-radius: 999px; background: var(--sea-deep); color: #fff; font: 800 .85rem/1 var(--font-heading); text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--sea-deep); box-shadow: inset 0 0 0 2px var(--sea-deep); margin-left: .6rem; }
+  .btn:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+  .board { position: relative; min-height: 28rem; }
+  .pc { position: absolute; background: var(--card); padding: .7rem .7rem 2.4rem; border-radius: var(--radius); box-shadow: var(--shadow); width: 58%; }
+  .pc .img { aspect-ratio: 4/3; border-radius: 3px; }
+  .pc .cap { position: absolute; bottom: .6rem; left: .9rem; font: 600 1.4rem/1 var(--font-hand); color: var(--ink); }
+  .pc.a { left: 0; top: 1rem; transform: rotate(-6deg); }
+  .pc.a .img { background: linear-gradient(180deg, #8fd3e8 0 45%, #009d90 45% 70%, #e8dcc8 70%); }
+  .pc.b { right: 0; top: 0; transform: rotate(5deg); width: 50%; }
+  .pc.b .img { background: radial-gradient(circle at 70% 30%, #f2b84b 0 14%, transparent 15%), linear-gradient(180deg, #f6c8a8, #e86a4f 60%, #12303a 60%); }
+  .pc.c { left: 8%; top: 15rem; transform: rotate(2deg); width: 48%; }
+  .pc.c .img { background: linear-gradient(160deg, #ffffff 0 35%, #cfe7ef 35% 60%, #5d7b86 60%); }
+  .stamp { position: absolute; right: 6%; bottom: 1rem; width: 6.5rem; height: 6.5rem; border-radius: 50%; border: 3px dashed var(--coral); color: var(--coral); display: grid; place-items: center; text-align: center; font: 800 .7rem/1.2 var(--font-heading); text-transform: uppercase; transform: rotate(-14deg); }
+
+  /* Wave divider into the services band */
+  .band { background: var(--night); color: #eaf4f2; position: relative; padding: 5rem 0 4rem; }
+  .band::before { content: ''; position: absolute; top: -2.5rem; left: 0; right: 0; height: 2.6rem; background: var(--night); clip-path: polygon(0 60%, 10% 30%, 22% 55%, 35% 20%, 50% 55%, 63% 25%, 77% 55%, 90% 25%, 100% 50%, 100% 100%, 0 100%); }
+  .band h2 { font: 900 clamp(1.8rem, 3.6vw, 2.8rem)/1.1 var(--font-heading); margin: 0 0 .4rem; }
+  .band .hand { font: 600 1.6rem/1 var(--font-hand); color: var(--sun); }
+  .tickets { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.4rem; margin-top: 2.2rem; }
+  .ticket { background: var(--card); color: var(--ink); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; overflow: hidden; }
+  .ticket .main { padding: 1.3rem 1.3rem 1.4rem; }
+  .ticket .stub { writing-mode: vertical-rl; background: var(--sea); color: #04120f; font: 800 .75rem/1 var(--font-heading); letter-spacing: .2em; text-transform: uppercase; padding: 1rem .7rem; border-left: 2px dashed var(--card); }
+  .ticket h3 { font: 800 1.25rem/1.2 var(--font-heading); margin: 0 0 .4rem; }
+  .ticket .from { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .ticket p { margin: .5rem 0 0; color: var(--ink-soft); }
+
+  /* Travel log: culture/recruiting */
+  .log { padding: 4.5rem 0; display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+  .log h2 { font: 900 clamp(1.8rem, 3.6vw, 2.8rem)/1.1 var(--font-heading); margin: 0; }
+  .log .hand { font: 600 1.7rem/1 var(--font-hand); color: var(--coral); }
+  .route { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 3px dotted var(--sea); }
+  .route li { position: relative; padding: 0 0 1.6rem 1rem; }
+  .route li::before { content: ''; position: absolute; left: -1.95rem; top: .3rem; width: .9rem; height: .9rem; border-radius: 50%; background: var(--sand); border: 3px solid var(--sea-deep); }
+  .route b { font: 800 1.05rem/1.3 var(--font-heading); display: block; }
+  .route span { color: var(--ink-soft); }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; padding-bottom: 4rem; }
+  .gallery div { aspect-ratio: 1; border-radius: var(--radius); }
+  .gallery div:nth-child(1) { background: linear-gradient(#a6d8e6 50%, #3f8f6b 50%); transform: rotate(-2deg); }
+  .gallery div:nth-child(2) { background: linear-gradient(#f6c8a8 40%, #009d90 40%); transform: rotate(2deg); }
+  .gallery div:nth-child(3) { background: linear-gradient(#dfe9ee 55%, #ffffff 55%); transform: rotate(-1deg); }
+  .gallery div:nth-child(4) { background: linear-gradient(#f2b84b 45%, #12303a 45%); transform: rotate(3deg); }
+
+  /* Contact as the back of a postcard */
+  .back { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 4rem; }
+  .back .msg { padding: 2rem; border-right: 2px solid var(--sand-deep); }
+  .back .msg h2 { font: 900 2rem/1.1 var(--font-heading); margin: 0 0 .5rem; }
+  .back .msg p { font: 600 1.5rem/1.3 var(--font-hand); color: var(--ink-soft); }
+  .back form { padding: 2rem; }
+  .back label { display: block; font: 600 .75rem/1 var(--font-heading); text-transform: uppercase; letter-spacing: .1em; margin-top: 1rem; }
+  .back input, .back textarea { width: 100%; border: 0; border-bottom: 2px solid var(--sand-deep); background: transparent; font: 600 1.3rem/1.4 var(--font-hand); padding: .3rem 0; }
+  .back input:focus-visible, .back textarea:focus-visible { outline: none; border-color: var(--sea); }
+  footer { text-align: center; padding: 0 0 2rem; font-size: .8rem; color: var(--ink-soft); }
+
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .hero, .log, .back { grid-template-columns: 1fr; }
+    .board { min-height: 22rem; }
+    .pc { width: 62%; }
+    .pc.c { top: 10rem; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .back .msg { border-right: 0; border-bottom: 2px solid var(--sand-deep); }
+    .btn.ghost { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="brand">Ert företag</div><nav><a href="#tjanster">Tjänster</a><a href="#jobba">Jobba här</a><a href="#kontakt">Kontakt</a></nav></header>
+    <section class="hero">
+      <div>
+        <h1>Lösningar som hjälper i vardagen<span class="hand">och kollegor att resa med</span></h1>
+        <p>En platshållare för ingressen: vad ni gör, för vem, och varför det är roligare här.</p>
+        <a class="btn" href="#kontakt">Kontakta oss</a><a class="btn ghost" href="#jobba">Jobba här</a>
+      </div>
+      <div class="board" aria-hidden="true">
+        <div class="pc a"><div class="img"></div><span class="cap">Bildplats: segling</span></div>
+        <div class="pc b"><div class="img"></div><span class="cap">Bildplats: konferens</span></div>
+        <div class="pc c"><div class="img"></div><span class="cap">Bildplats: fjäll</span></div>
+        <div class="stamp">Hälsningar från teamet</div>
+      </div>
+    </section>
+  </div>
+
+  <section class="band" id="tjanster">
+    <div class="wrap">
+      <span class="hand">Vart vill ni?</span>
+      <h2>Tre resmål för ert projekt</h2>
+      <div class="tickets">
+        <div class="ticket"><div class="main"><div class="from">Från idé · Till drift</div><h3>Systemutveckling</h3><p>En eller två meningar om tjänsten.</p></div><div class="stub">Biljett 01</div></div>
+        <div class="ticket"><div class="main"><div class="from">Från krav · Till kvalitet</div><h3>Test</h3><p>En eller två meningar om tjänsten.</p></div><div class="stub">Biljett 02</div></div>
+        <div class="ticket"><div class="main"><div class="from">Från data · Till beslut</div><h3>Data och AI</h3><p>En eller två meningar om tjänsten.</p></div><div class="stub">Biljett 03</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="log" id="jobba">
+      <div><span class="hand">Loggbok</span><h2>Ett år som konsult hos oss</h2><p>En platshållare om kultur: frihet att välja, tid för kollegor och resor tillsammans.</p><a class="btn" href="#kontakt">Läs mer</a></div>
+      <ol class="route">
+        <li><b>Januari: kickoff</b><span>En mening om vad som händer.</span></li>
+        <li><b>Våren: konferens</b><span>En mening om vad som händer.</span></li>
+        <li><b>Sommaren: frihet</b><span>En mening om hur ni lägger semestern.</span></li>
+        <li><b>Hösten: resa</b><span>En mening om årets resa.</span></li>
+      </ol>
+    </section>
+    <div class="gallery" aria-label="Bildplatser för fyra foton"><div></div><div></div><div></div><div></div></div>
+
+    <section class="back" id="kontakt">
+      <div class="msg"><h2>Skicka ett vykort</h2><p>Hej! Skriv några rader om vad ni behöver, så hör vi av oss.</p></div>
+      <form onsubmit="return false">
+        <label for="n">Namn</label><input id="n" placeholder="Ert namn">
+        <label for="e">E-post</label><input id="e" placeholder="namn@exempel.se">
+        <label for="m">Meddelande</label><textarea id="m" rows="3"></textarea>
+        <a class="btn" href="#kontakt">Skicka</a>
+      </form>
+    </section>
+  </div>
+  <footer>Ert företag · Platshållartext · Mockup B</footer>
+</body>
+</html>

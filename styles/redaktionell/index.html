@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup A: Redaktionell</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --paper-deep: #efe9df;
+    --ink: #1b1d1c;
+    --ink-soft: #55585a;
+    --rule: #1b1d1c;
+    --teal: #009d90;
+    --teal-ink: #00695f;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --space: 1.5rem;
+    --measure: 34rem;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.65 var(--font-body); }
+  a { color: inherit; }
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 var(--space); }
+
+  /* Masthead like a magazine cover */
+  .masthead { border-bottom: 3px double var(--rule); }
+  .masthead .top { display: flex; justify-content: space-between; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; padding: .6rem 0; border-bottom: 1px solid var(--rule); }
+  .masthead .name { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 11vw, 8.5rem); line-height: 1.05; letter-spacing: -.03em; text-align: center; padding: 1rem 0 .4rem; }
+  .masthead .name span { color: var(--teal); }
+  .masthead nav { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: .7rem 0; border-top: 1px solid var(--rule); font-weight: 600; font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
+  .masthead nav a { text-decoration: none; }
+  .masthead nav a:hover { color: var(--teal-ink); }
+
+  /* Cover story */
+  .cover { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+  .kicker { font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal-ink); }
+  .cover h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.4rem, 5.5vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; margin: .5rem 0 1.2rem; }
+  .cover h1 em { font-style: italic; color: var(--teal-ink); }
+  .cover .dek { font-size: 1.2rem; color: var(--ink-soft); max-width: var(--measure); }
+  .byline { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin-top: 1.5rem; }
+  .photo { background: linear-gradient(160deg, #0b6f66 0%, #009d90 45%, #b7ddd5 100%); min-height: 26rem; position: relative; }
+  .photo::after { content: 'Bildplats: helsidesfoto från en konferensresa'; position: absolute; left: 0; right: 0; bottom: -1.8rem; font-size: .75rem; font-style: italic; color: var(--ink-soft); }
+  .photo .sun { position: absolute; width: 7rem; height: 7rem; border-radius: 50%; background: #f3d9a4; right: 18%; top: 14%; }
+  .photo .hill { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: #0a4d47; clip-path: polygon(0 60%, 30% 20%, 55% 55%, 80% 10%, 100% 40%, 100% 100%, 0 100%); }
+  .cta { display: inline-block; margin-top: 2rem; padding: .9rem 1.6rem; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .85rem; }
+  .cta:hover, .cta:focus-visible { background: var(--teal-ink); outline: none; }
+
+  /* Contents list */
+  .contents { display: grid; grid-template-columns: 12rem 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+  .contents h2 { font-family: var(--font-display); font-size: 1.6rem; margin: 0; }
+  .toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 2rem; }
+  .toc a { display: grid; grid-template-columns: 2.5rem 1fr; padding: .9rem 0; border-top: 1px solid #c9c2b5; text-decoration: none; }
+  .toc b { font-family: var(--font-display); font-size: 1.6rem; color: var(--teal); line-height: 1; }
+  .toc span { font-weight: 600; }
+  .toc small { display: block; color: var(--ink-soft); font-weight: 400; }
+
+  /* Services as three columns with drop caps */
+  .feature { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+  .feature h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); margin: .3rem 0 2rem; }
+  .cols { columns: 3 16rem; column-gap: 2.5rem; column-rule: 1px solid #c9c2b5; }
+  .cols article { break-inside: avoid; margin-bottom: 1.5rem; }
+  .cols h3 { font-family: var(--font-display); font-size: 1.35rem; margin: 0 0 .4rem; }
+  .cols p:first-of-type::first-letter { font-family: var(--font-display); float: left; font-size: 3.2rem; line-height: .9; padding: .2rem .4rem 0 0; color: var(--teal-ink); font-weight: 800; }
+
+  /* Pull quote */
+  .pull { background: var(--paper-deep); padding: 4rem 0; border-bottom: 1px solid var(--rule); }
+  .pull blockquote { margin: 0 auto; max-width: 52rem; font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1.2; text-align: center; }
+  .pull blockquote::before { content: '\201C'; display: block; font-size: 5rem; line-height: .6; color: var(--teal); }
+  .pull cite { display: block; margin-top: 1.4rem; text-align: center; font: 600 .8rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; font-style: normal; }
+
+  /* Cases as a numbered "in this issue" list */
+  .cases { padding: 3rem 0; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; border-bottom: 1px solid var(--rule); }
+  .cases h2 { font-family: var(--font-display); font-size: 2.4rem; margin: 0; line-height: 1.05; }
+  .case { display: grid; grid-template-columns: 4rem 1fr auto; gap: 1rem; align-items: baseline; padding: 1.2rem 0; border-top: 1px solid #c9c2b5; }
+  .case .n { font-family: var(--font-display); font-size: 2.2rem; color: var(--teal); }
+  .case h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; }
+  .case p { margin: .2rem 0 0; color: var(--ink-soft); }
+  .case .tag { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--ink); padding: .2rem .5rem; }
+
+  /* Contact as a letter to the editor */
+  .letter { padding: 3.5rem 0 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .letter h2 { font-family: var(--font-display); font-size: 2.4rem; margin: 0 0 1rem; }
+  .letter label { display: block; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; margin-top: 1rem; }
+  .letter input, .letter textarea { width: 100%; border: 0; border-bottom: 1px solid var(--ink); background: transparent; font: inherit; padding: .5rem 0; }
+  .letter textarea { min-height: 6rem; }
+  .letter input:focus-visible, .letter textarea:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  footer { border-top: 3px double var(--rule); padding: 1.2rem 0 2rem; font-size: .8rem; text-align: center; letter-spacing: .08em; text-transform: uppercase; }
+
+  @media (max-width: 760px) {
+    .cover, .contents, .cases, .letter { grid-template-columns: 1fr; gap: 1.5rem; }
+    .photo { min-height: 16rem; margin-bottom: 1.5rem; }
+    .masthead .top span:last-child { display: none; }
+    .masthead nav { gap: 1rem; }
+    .case { grid-template-columns: 3rem 1fr; }
+    .case .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <div class="top"><span>Nummer 01 · Vintern</span><span>Ett magasin om att bygga och testa mjukvara</span></div>
+      <div class="name">Ert företag<span>.</span></div>
+      <nav><a href="#tjanster">Tjänster</a><a href="#case">Case</a><a href="#citat">Kultur</a><a href="#kontakt">Kontakt</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="cover">
+      <div>
+        <div class="kicker">Omslagsreportage</div>
+        <h1>Vi bygger lösningar som <em>gör vardagen lättare</em></h1>
+        <p class="dek">En platshållare för ingressen: två meningar om vilka ni är, vad ni gör och varför kunden ska läsa vidare.</p>
+        <p class="byline">Text: Redaktionen · Lästid 3 min</p>
+        <a class="cta" href="#kontakt">Kontakta oss</a>
+      </div>
+      <div class="photo" role="img" aria-label="Bildplats"><div class="sun"></div><div class="hill"></div></div>
+    </section>
+
+    <section class="contents">
+      <h2>I det här numret</h2>
+      <div class="toc">
+        <a href="#tjanster"><b>1</b><span>Tjänster<small>Utveckling, test och data</small></span></a>
+        <a href="#citat"><b>2</b><span>Kultur<small>Hur det är att jobba här</small></span></a>
+        <a href="#case"><b>3</b><span>Case<small>Tre uppdrag i korthet</small></span></a>
+        <a href="#kontakt"><b>4</b><span>Kontakt<small>Skriv till redaktionen</small></span></a>
+      </div>
+    </section>
+
+    <section class="feature" id="tjanster">
+      <div class="kicker">Tema</div>
+      <h2>Tre sätt vi hjälper till</h2>
+      <div class="cols">
+        <article><h3>Systemutveckling</h3><p>Platshållartext om hur ni bygger system som håller. En eller två meningar räcker gott för en ingress.</p><p>Ett andra stycke kan beskriva arbetssätt och verktyg.</p></article>
+        <article><h3>Test</h3><p>Platshållartext om testledning, automatisering och kvalitet genom hela kedjan.</p><p>Ett andra stycke med ett konkret exempel.</p></article>
+        <article><h3>Data och AI</h3><p>Platshållartext om analys, rapporter och AI som går att lita på.</p><p>Ett andra stycke om hur ni mäter nyttan.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <section class="pull" id="citat">
+    <div class="wrap">
+      <blockquote>Här står ett citat från en konsult om varför det är roligt att gå till jobbet.</blockquote>
+      <cite>Förnamn Efternamn, konsult</cite>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="cases" id="case">
+      <h2>Case i korthet</h2>
+      <div>
+        <div class="case"><span class="n">01</span><div><h3>Case ett</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="tag">Test</span></div>
+        <div class="case"><span class="n">02</span><div><h3>Case två</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="tag">Utveckling</span></div>
+        <div class="case"><span class="n">03</span><div><h3>Case tre</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="tag">Data</span></div>
+      </div>
+    </section>
+
+    <section class="letter" id="kontakt">
+      <div>
+        <div class="kicker">Brev till redaktionen</div>
+        <h2>Berätta vad ni behöver</h2>
+        <p>En mening om hur snabbt ni svarar och vem som läser.</p>
+      </div>
+      <div>
+        <label for="n">Namn</label><input id="n">
+        <label for="e">E-post</label><input id="e">
+        <label for="m">Meddelande</label><textarea id="m"></textarea>
+        <a class="cta" href="#kontakt">Skicka</a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">Ert företag · Platshållartext · Mockup A</div></footer>
+</body>
+</html>

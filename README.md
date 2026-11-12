@@ -3,8 +3,9 @@
 A responsive landing page skeleton in Swedish placeholder text, built with TypeScript, esbuild and
 [FAST Element](https://www.fast.design/) web components. Sections: hero, services, about, cases, team, contact.
 
-Theme: teal `#009D90` with a darker teal for small text, Montserrat for headings, Open Sans for body text,
-light and dark mode (follows the system setting). There is no logo file; add your own.
+Look: deliberately neutral and technical. System fonts, grey surfaces and one plain blue accent, light and dark
+mode (follows the system setting), all from design tokens in `index.html`. No brand, no logo: choosing a style is
+the workshop's next step (below).
 
 ## Start
 
@@ -17,8 +18,15 @@ npm run build    # type-check and bundle into dist/
 `npm run screens` writes screenshots of `dist/` to `screens/` (375 and 1280 px, light and dark). It needs a
 Chromium for Playwright: `npx playwright install chromium`.
 
-`npm run check:links` loads `dist/` in Chromium and checks that the menu links, the hero buttons and a direct
-`/#contact` load scroll to their section (build first).
+`npm run check:links` loads `dist/` in Chromium and checks that every menu link (read from the page, clicked once
+and again), the hero buttons, the brand link and a direct `/#contact` load scroll to their section (build first).
+
+## Workshop step: choose a style
+
+[`styles/`](styles/README.md) holds four example styles: Vykort (postcards), Redaktionell (magazine), Pipeline
+(developer-first, dark) and Glädje (playful). Each is a mockup page you open in the browser and a `tokens.css`
+with its palette and type. Pick one and ask your AI tool to apply it to the starter; the prompt and the checks are
+in [styles/README.md](styles/README.md).
 
 ## How it fits together
 
