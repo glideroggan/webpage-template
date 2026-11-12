@@ -4,6 +4,10 @@ import { sectionBase } from '../../styles/section-base';
 export const styles = [
   sectionBase,
   css`
+    :host {
+      background: var(--bg-surface-alt);
+    }
+
     .grid {
       list-style: none;
       margin: 0;
@@ -14,12 +18,7 @@ export const styles = [
     }
 
     .member {
-      padding: var(--space-lg);
       text-align: center;
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-base);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
     }
 
     .avatar {

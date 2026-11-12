@@ -5,7 +5,7 @@ export const styles = [
   sectionBase,
   css`
     :host {
-      background: var(--bg-surface-alt);
+      background: var(--bg-app);
     }
 
     .lead {

@@ -7,7 +7,7 @@ export const styles = [
     :host {
       background: var(--hero-gradient);
       padding-top: calc(var(--space-3xl) + var(--space-xl));
-      padding-bottom: calc(var(--space-3xl) + var(--space-xl));
+      padding-bottom: var(--space-3xl);
     }
 
     .eyebrow {

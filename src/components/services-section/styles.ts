@@ -3,7 +3,8 @@ import { sectionBase } from '../../styles/section-base';
 
 // Only tokens (var(--...)) here: no raw colours, sizes, borders, weights or fonts. The tokens
 // are defined in index.html and reach into the shadow DOM because custom properties inherit.
-// The only raw values are 100% and media-query breakpoints, which CSS cannot read from a token.
+// The only raw values are 0, 100%, grid fractions (1fr) and media-query breakpoints, which CSS
+// cannot read from a token. The card look itself (.card) comes from sectionBase.
 export const styles = [
   sectionBase,
   css`
@@ -17,33 +18,7 @@ export const styles = [
     }
 
     .card {
-      width: 100%;
       height: 100%;
-      text-align: left;
-      font: inherit;
-      color: inherit;
-      cursor: pointer;
-      padding: var(--space-lg);
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-base);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-strong);
-    }
-
-    .card:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
-
-    .card.selected {
-      border-color: var(--accent-primary);
-      box-shadow: var(--shadow-md);
     }
 
     .number {
@@ -69,6 +44,33 @@ export const styles = [
     p {
       margin: 0;
       color: var(--text-secondary);
+    }
+
+    .details {
+      margin-top: var(--space-sm);
+    }
+
+    .more {
+      margin-top: var(--space-md);
+      padding: var(--space-2xs) var(--space-sm);
+      font: inherit;
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--accent-text);
+      background: transparent;
+      border: var(--border-width) solid var(--border-strong);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .more:hover {
+      background: var(--bg-surface-alt);
+    }
+
+    .more:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
 
     .empty {

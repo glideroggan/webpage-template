@@ -39,7 +39,6 @@
       --leading-snug: 1.2;
       --leading-body: 1.6;
       --tracking-wide: 0.08em;
-      --text-xs: 0.75rem;
       --text-sm: 0.875rem;
       --text-base: 1rem;
       --text-lg: 1.125rem;
@@ -64,21 +63,18 @@
       --badge-size: 2.25rem;
       --avatar-size: 4rem;
       --card-min: 16rem;
-      --card-min-sm: 12rem;
-      --header-offset: 4rem;
+      --card-min-sm: 9rem;
+      --header-offset: 5rem;
       --z-header: 10;
 
       /* Shape and motion */
       --border-width: 1px;
       --border-width-strong: 2px;
-      --border-accent: 4px;
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 12px;
-      --radius-xl: 16px;
       --radius-full: 50%;
       --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.12);
       --transition-fast: 150ms ease;
 
       /* Surfaces (light) */
@@ -86,13 +82,12 @@
       --bg-surface: #ffffff;
       --bg-surface-alt: #eef0f3;
       --border-base: #d9dde3;
-      --border-strong: #b4bcc6;
+      --border-strong: #7b8594;
 
       /* Text (light). --text-muted is at least 4.5:1 on every light surface. */
       --text-primary: #111827;
       --text-secondary: #374151;
       --text-muted: #4b5563;
-      --text-inverse: #ffffff;
 
       /*
        * Accent. --accent-primary is for borders, rings and large shapes; small text and button
@@ -105,21 +100,21 @@
       --accent-on-strong: #ffffff;
       --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 45%, transparent);
 
-      --hero-gradient: linear-gradient(180deg, #eef0f3 0%, #f6f7f9 100%);
+      /* Built from the surface tokens, so it follows dark mode and any style that changes them. */
+      --hero-gradient: linear-gradient(180deg, var(--bg-surface-alt) 0%, var(--bg-app) 100%);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --bg-app: #0f1115;
-        --bg-surface: #171a21;
-        --bg-surface-alt: #1d212a;
+        --bg-surface: #1f232c;
+        --bg-surface-alt: #161920;
         --border-base: #2a2f3a;
-        --border-strong: #3d4452;
+        --border-strong: #6b7383;
 
         --text-primary: #e5e7eb;
         --text-secondary: #c4c9d2;
         --text-muted: #9aa3b2;
-        --text-inverse: #0b1220;
 
         --accent-primary: #60a5fa;
         --accent-strong: #3b82f6;
@@ -128,8 +123,6 @@
         --accent-on-strong: #0b1220;
 
         --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-        --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.55);
-        --hero-gradient: linear-gradient(180deg, #1d212a 0%, #0f1115 100%);
       }
     }
   </style>

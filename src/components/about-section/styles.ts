@@ -27,13 +27,6 @@ export const styles = [
       gap: var(--space-md);
     }
 
-    .fact {
-      padding: var(--space-lg);
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-base);
-      border-radius: var(--radius-lg);
-    }
-
     dt {
       font-family: var(--font-heading);
       font-size: var(--text-3xl);

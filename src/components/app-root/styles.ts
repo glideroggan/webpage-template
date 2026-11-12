@@ -42,6 +42,8 @@ export const styles = css`
   }
 
   nav a {
+    display: inline-block;
+    padding-block: var(--space-2xs);
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: var(--weight-semibold);
@@ -58,6 +60,7 @@ export const styles = css`
   }
 
   .footer {
+    border-top: var(--border-width) solid var(--border-base);
     padding: var(--space-xl) var(--space-lg);
     text-align: center;
     color: var(--text-muted);

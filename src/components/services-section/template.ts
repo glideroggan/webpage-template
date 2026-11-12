@@ -7,16 +7,22 @@ import type { ServicesSection } from './index';
 // and the item's position is context.index.
 const cardTemplate = html<Service, ServicesSection>/*html*/`
   <li>
-    <button
-      type="button"
-      class="${(x, c) => (c.parent.selected === c.index ? 'card selected' : 'card')}"
-      aria-pressed="${(x, c) => c.parent.selected === c.index}"
-      @click="${(x, c) => c.parent.select(c.index)}"
-    >
-      <span class="number">${(x, c) => c.index + 1}</span>
+    <article class="card">
+      <span class="number" aria-hidden="true">${(x, c) => c.index + 1}</span>
       <h3>${x => x.title}</h3>
       <p>${x => x.description}</p>
-    </button>
+      ${when((x, c) => c.parent.expanded === c.index, html<Service, ServicesSection>/*html*/`
+        <p class="details">${x => x.details}</p>
+      `)}
+      <button
+        type="button"
+        class="more"
+        aria-expanded="${(x, c) => c.parent.expanded === c.index}"
+        @click="${(x, c) => c.parent.toggle(c.index)}"
+      >
+        ${(x, c) => (c.parent.expanded === c.index ? c.parent.titles.readLess : c.parent.titles.readMore)}
+      </button>
+    </article>
   </li>
 `;
 

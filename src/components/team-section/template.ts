@@ -3,7 +3,7 @@ import type { TeamMember } from '../../content';
 import type { TeamSection } from './index';
 
 const memberTemplate = html<TeamMember>/*html*/`
-  <li class="member">
+  <li class="card member">
     <span class="avatar" aria-hidden="true">${x => x.name.charAt(0)}</span>
     <h3>${x => x.name}</h3>
     <p>${x => x.role}</p>

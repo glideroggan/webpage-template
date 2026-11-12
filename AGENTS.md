@@ -70,7 +70,9 @@ styles/<name>/        example styles for the workshop (mockup + tokens.css); not
   component.** Use tokens from `index.html`: `var(--space-md)`, `var(--text-secondary)`, `var(--radius-lg)`,
   `var(--border-width)`, `var(--weight-semibold)`, `var(--font-heading)` and so on. A new value becomes a token
   in `index.html` first; a new colour also gets a dark value in the `prefers-color-scheme: dark` block.
-  The only raw values are `100%`, grid fractions (`1fr`) and media-query breakpoints (CSS cannot read a token there).
+  The only raw values are `0`, `100%`, grid fractions (`1fr`) and media-query breakpoints (CSS cannot read a token there).
+- Cards share one look: give the element `class="card"` and it gets padding, surface, border, radius and shadow from
+  `src/styles/section-base.ts`. A section's own CSS adds only what is specific to it.
 - The base look is neutral on purpose (system fonts, grey surfaces, a blue accent). Applying a style starts with
   the token values in `index.html`; component changes it needs still use tokens only. See `styles/README.md`.
 - `--accent-primary` is only for borders, rings and large shapes. Small text and button fills use

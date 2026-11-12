@@ -12,11 +12,11 @@ export class ServicesSection extends FASTElement {
   // Assign a new array to change it: FAST only notices reassignment, not splice or push.
   @observable items: Service[] = services;
 
-  // Which card is highlighted, or -1. Demonstrates a click handler and a conditional class.
-  @observable selected: number = -1;
+  // Which card shows its details, or -1. Demonstrates a click handler, when() and an aria state.
+  @observable expanded: number = -1;
 
-  select(index: number): boolean {
-    this.selected = this.selected === index ? -1 : index;
+  toggle(index: number): boolean {
+    this.expanded = this.expanded === index ? -1 : index;
     // Return true so the browser keeps its default behaviour: FAST calls preventDefault()
     // on any handler result that is not exactly true.
     return true;

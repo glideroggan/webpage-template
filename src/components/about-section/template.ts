@@ -9,7 +9,7 @@ export const template = html<AboutSection>/*html*/`
     </div>
     <dl class="facts">
       ${repeat(x => x.content.facts, html<{ value: string; label: string }>/*html*/`
-        <div class="fact">
+        <div class="card">
           <dt>${x => x.value}</dt>
           <dd>${x => x.label}</dd>
         </div>

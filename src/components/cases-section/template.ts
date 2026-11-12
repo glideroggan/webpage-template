@@ -3,7 +3,7 @@ import type { Case } from '../../content';
 import type { CasesSection } from './index';
 
 const caseTemplate = html<Case>/*html*/`
-  <li class="case">
+  <li class="card">
     <p class="customer">${x => x.customer}</p>
     <h3>${x => x.title}</h3>
     <p class="summary">${x => x.summary}</p>
