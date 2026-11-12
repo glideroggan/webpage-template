@@ -5,7 +5,8 @@
  * Fonts (add to <head> in the starter's index.html):
  *   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
  *
- * The mockup is light only: the starter's dark block needs its own values.
+ * Light only, like the mockup: these values go in the starter's light :root block. The starter's
+ * dark block still applies in dark mode, so give it matching dark values too.
  */
 :root {
   /* Palette */
@@ -32,6 +33,7 @@
   --text-secondary: var(--ink-soft);
   --text-muted: var(--ink-soft);
   --accent-primary: var(--teal);
+  --border-strong: var(--ink-soft);
   --accent-strong: var(--ink);
   --accent-strong-hover: var(--teal-ink);
   --accent-text: var(--teal-ink);
@@ -39,5 +41,4 @@
   --radius-md: 0;
   --radius-lg: 0;
   --shadow-sm: none;
-  --shadow-md: none;
 }
