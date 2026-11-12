@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stil: Pipeline</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1513;
+    --bg-raised: #12201d;
+    --line: #23413b;
+    --text: #e6f2ef;
+    --text-soft: #9db8b2;
+    --teal: #009d90;
+    --teal-bright: #3fd1c3;
+    --pass: #6ee7a8;
+    --warn: #f2b84b;
+    --fail: #ff6b6b;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.6 var(--font-body);
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px; background-position: -1px -1px; }
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 1.5rem; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 2; }
+  .brand { font: 700 1.3rem/1 var(--font-display); }
+  .brand i { font-style: normal; color: var(--teal-bright); }
+  nav { display: flex; gap: 1.4rem; font: 400 .85rem/1 var(--font-mono); }
+  nav a { color: var(--text-soft); text-decoration: none; }
+  nav a::before { content: './'; color: var(--teal); }
+  nav a:hover, nav a:focus-visible { color: var(--teal-bright); outline: none; }
+
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; padding: 4.5rem 0 3.5rem; align-items: center; }
+  .status { display: inline-flex; gap: .5rem; align-items: center; font: 400 .8rem/1 var(--font-mono); color: var(--pass); border: 1px solid var(--line); background: var(--bg-raised); padding: .45rem .8rem; border-radius: 999px; }
+  .status::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: var(--pass); box-shadow: 0 0 0 4px rgba(110, 231, 168, .18); }
+  h1 { font: 700 clamp(2.4rem, 5.4vw, 4.4rem)/1.02 var(--font-display); letter-spacing: -.03em; margin: 1.2rem 0 1rem; }
+  h1 mark { background: none; color: var(--teal-bright); }
+  .lead { color: var(--text-soft); font-size: 1.15rem; max-width: 32rem; }
+  .btns { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.6rem; }
+  .btn { padding: .85rem 1.3rem; border-radius: var(--radius); font: 700 .9rem/1 var(--font-mono); text-decoration: none; }
+  .btn.primary { background: var(--teal-bright); color: #04120f; }
+  .btn.secondary { color: var(--text); border: 1px solid var(--line); background: var(--bg-raised); }
+  .btn:focus-visible { outline: 2px solid var(--warn); outline-offset: 3px; }
+
+  /* Terminal card with a fake test run */
+  .term { background: #07100e; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 60px rgba(0, 0, 0, .45); }
+  .term .bar { display: flex; gap: .4rem; padding: .7rem .9rem; border-bottom: 1px solid var(--line); }
+  .term .bar span { width: .7rem; height: .7rem; border-radius: 50%; background: var(--line); }
+  .term pre { margin: 0; padding: 1.1rem 1.2rem 1.4rem; font: 400 .85rem/1.75 var(--font-mono); color: var(--text-soft); white-space: pre-wrap; }
+  .term .ok { color: var(--pass); } .term .cmd { color: var(--text); } .term .dim { color: #5d7a74; } .term .hl { color: var(--teal-bright); }
+
+  /* Big numbers */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised); }
+  .metric { padding: 1.6rem 1.4rem; border-right: 1px solid var(--line); }
+  .metric:last-child { border-right: 0; }
+  .metric b { display: block; font: 700 clamp(2rem, 4.6vw, 3.4rem)/1 var(--font-display); color: var(--teal-bright); letter-spacing: -.03em; }
+  .metric span { font: 400 .8rem/1.4 var(--font-mono); color: var(--text-soft); }
+
+  /* Services as pipeline stages */
+  section.block { padding: 4.5rem 0 1rem; }
+  .eyebrow { font: 400 .8rem/1 var(--font-mono); color: var(--teal-bright); }
+  h2 { font: 700 clamp(1.8rem, 3.6vw, 2.8rem)/1.1 var(--font-display); letter-spacing: -.02em; margin: .6rem 0 2rem; }
+  .pipe { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .stage { background: var(--bg-raised); border: 1px solid var(--line); padding: 1.4rem; position: relative; }
+  .stage + .stage { border-left: 0; }
+  .stage:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .stage:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+  .stage .n { font: 700 .75rem/1 var(--font-mono); color: var(--bg); background: var(--teal-bright); border-radius: 4px; padding: .25rem .45rem; }
+  .stage h3 { font: 700 1.25rem/1.2 var(--font-display); margin: 1rem 0 .4rem; }
+  .stage p { margin: 0; color: var(--text-soft); font-size: .95rem; }
+  .stage .bar { height: 4px; margin-top: 1.2rem; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .stage .bar i { display: block; height: 100%; background: var(--teal-bright); }
+
+  /* Cases as a changelog */
+  .log { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised); }
+  .entry { display: grid; grid-template-columns: 8rem 1fr auto; gap: 1.2rem; padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .entry:last-child { border-bottom: 0; }
+  .entry code { font: 400 .8rem/1 var(--font-mono); color: var(--text-soft); }
+  .entry h3 { margin: 0; font: 700 1.1rem/1.3 var(--font-display); }
+  .entry p { margin: .2rem 0 0; color: var(--text-soft); font-size: .95rem; }
+  .pill { justify-self: start; font: 700 .7rem/1 var(--font-mono); padding: .3rem .55rem; border-radius: 999px; border: 1px solid currentColor; }
+  .pill.p { color: var(--pass); } .pill.w { color: var(--warn); }
+
+  /* Contact as a config form */
+  .contact { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; padding: 4.5rem 0; }
+  .form { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; font-family: var(--font-mono); }
+  .form label { display: block; font-size: .8rem; color: var(--teal-bright); margin-top: 1rem; }
+  .form label:first-child { margin-top: 0; }
+  .form input, .form textarea { width: 100%; margin-top: .4rem; background: #07100e; border: 1px solid var(--line); border-radius: 6px; color: var(--text); font: 400 .95rem/1.5 var(--font-mono); padding: .65rem .8rem; }
+  .form input:focus-visible, .form textarea:focus-visible { outline: 2px solid var(--teal-bright); outline-offset: 1px; }
+  .form .btn { display: inline-block; margin-top: 1.2rem; }
+  footer { border-top: 1px solid var(--line); padding: 1.4rem 0 2rem; font: 400 .8rem/1 var(--font-mono); color: var(--text-soft); background: var(--bg); }
+
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .hero, .contact { grid-template-columns: 1fr; padding-top: 2.5rem; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .metric:nth-child(2) { border-right: 0; }
+    .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .pipe { grid-template-columns: 1fr; }
+    .stage + .stage { border-left: 1px solid var(--line); border-top: 0; }
+    .stage:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+    .stage:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+    .entry { grid-template-columns: 1fr; gap: .4rem; }
+  }
+</style>
+</head>
+<body>
+  <header><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;width:100%"><div class="brand">ert_företag<i>.</i></div><nav><a href="#tjanster">tjänster</a><a href="#case">case</a><a href="#kontakt">kontakt</a></nav></div></header>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="status">Alla tester gröna · 00 konsulter på uppdrag</span>
+        <h1>Vi bygger, testar och <mark>levererar</mark> lösningar som håller.</h1>
+        <p class="lead">En platshållare för ingressen: utveckling och test i hela kedjan, från första commit till drift.</p>
+        <div class="btns"><a class="btn primary" href="#kontakt">$ kontakta-oss</a><a class="btn secondary" href="#tjanster">se tjänster →</a></div>
+      </div>
+      <div class="term" aria-label="Exempel på testkörning">
+        <div class="bar"><span></span><span></span><span></span></div>
+<pre><span class="cmd">$ npm run test:projekt</span>
+<span class="dim">› kör 3 sviter</span>
+<span class="ok">✓</span> systemutveckling  <span class="dim">00 ms</span>
+<span class="ok">✓</span> test och kvalitet <span class="dim">00 ms</span>
+<span class="ok">✓</span> data och AI       <span class="dim">00 ms</span>
+
+<span class="hl">3 passerade</span>, 0 fel · nöjd kund</pre>
+      </div>
+    </section>
+
+    <div class="metrics">
+      <div class="metric"><b>00</b><span>år i branschen</span></div>
+      <div class="metric"><b>00</b><span>konsulter</span></div>
+      <div class="metric"><b>000+</b><span>kunder genom åren</span></div>
+      <div class="metric"><b>0</b><span>team i olika tekniker</span></div>
+    </div>
+
+    <section class="block" id="tjanster">
+      <span class="eyebrow">// pipeline</span>
+      <h2>Från idé till drift, i fyra steg</h2>
+      <div class="pipe">
+        <div class="stage"><span class="n">01</span><h3>Plan</h3><p>En mening om kravarbete och agilt ledarskap.</p><div class="bar"><i style="width:100%"></i></div></div>
+        <div class="stage"><span class="n">02</span><h3>Bygg</h3><p>En mening om systemutveckling.</p><div class="bar"><i style="width:100%"></i></div></div>
+        <div class="stage"><span class="n">03</span><h3>Testa</h3><p>En mening om testledning och automatisering.</p><div class="bar"><i style="width:100%"></i></div></div>
+        <div class="stage"><span class="n">04</span><h3>Förstå</h3><p>En mening om data, BI och AI.</p><div class="bar"><i style="width:70%"></i></div></div>
+      </div>
+    </section>
+
+    <section class="block" id="case">
+      <span class="eyebrow">// changelog</span>
+      <h2>Senaste leveranserna</h2>
+      <div class="log">
+        <div class="entry"><code>v3 · Kund A</code><div><h3>Case ett</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="pill p">levererat</span></div>
+        <div class="entry"><code>v2 · Kund B</code><div><h3>Case två</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="pill p">levererat</span></div>
+        <div class="entry"><code>v1 · Kund C</code><div><h3>Case tre</h3><p>Vad problemet var och vad ni levererade.</p></div><span class="pill w">pågår</span></div>
+      </div>
+    </section>
+
+    <section class="contact" id="kontakt">
+      <div><span class="eyebrow">// kontakt</span><h2>Öppna ett ärende</h2><p style="color:var(--text-soft)">En mening om svarstid. Inget skickas, det här är en mockup.</p></div>
+      <div class="form">
+        <label for="n">namn:</label><input id="n" placeholder="&quot;Ert namn&quot;">
+        <label for="e">epost:</label><input id="e" placeholder="&quot;namn@exempel.se&quot;">
+        <label for="m">meddelande:</label><textarea id="m" rows="4"></textarea>
+        <a class="btn primary" href="#kontakt">$ skicka</a>
+      </div>
+    </section>
+  </div>
+  <footer><div class="wrap">ert_företag · platshållartext · pipeline</div></footer>
+</body>
+</html>

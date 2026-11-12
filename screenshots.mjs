@@ -1,5 +1,5 @@
 // Screenshots of the production build (run `npm run build` first) at phone and desktop
-// width, light and dark, into screens/. Needs Playwright's Chromium: `npx playwright install chromium`.
+// width, light and dark, into screens/.
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -24,8 +24,23 @@ await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 const url = `http://127.0.0.1:${server.address().port}/`;
 
 fs.mkdirSync(OUT, { recursive: true });
-// CHROMIUM_PATH points at an existing Chromium when Playwright's own download is not installed.
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+// Use whatever browser this machine has, so screenshots work without `npx playwright install`:
+// Playwright's own Chromium, else Microsoft Edge, else the Chromium at CHROMIUM_PATH.
+const launchBrowser = async () => {
+  const options = [{}, { channel: 'msedge' }];
+  if (process.env.CHROMIUM_PATH) options.push({ executablePath: process.env.CHROMIUM_PATH });
+  const errors = [];
+  for (const option of options) {
+    try {
+      return await chromium.launch(option);
+    } catch (error) {
+      errors.push(error.message.split('\n')[0]);
+    }
+  }
+  throw new Error(`No browser found. Run \`npx playwright install chromium\`, install Edge or set CHROMIUM_PATH.\n${errors.join('\n')}`);
+};
+
+const browser = await launchBrowser();
 try {
   for (const width of [375, 1280]) {
     for (const scheme of ['light', 'dark']) {

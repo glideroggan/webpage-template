@@ -8,9 +8,9 @@ export const styles = css`
   .header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: var(--z-header);
     background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-base);
+    border-bottom: var(--border-width) solid var(--border-base);
   }
 
   .bar {
@@ -27,7 +27,7 @@ export const styles = css`
   .brand {
     font-family: var(--font-heading);
     font-size: var(--text-lg);
-    font-weight: 700;
+    font-weight: var(--weight-bold);
     color: var(--accent-text);
     text-decoration: none;
   }
@@ -42,9 +42,11 @@ export const styles = css`
   }
 
   nav a {
+    display: inline-block;
+    padding-block: var(--space-2xs);
     color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: var(--weight-semibold);
   }
 
   nav a:hover {
@@ -58,6 +60,7 @@ export const styles = css`
   }
 
   .footer {
+    border-top: var(--border-width) solid var(--border-base);
     padding: var(--space-xl) var(--space-lg);
     text-align: center;
     color: var(--text-muted);

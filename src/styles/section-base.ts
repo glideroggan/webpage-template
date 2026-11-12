@@ -1,6 +1,6 @@
 import { css } from '@microsoft/fast-element';
 
-// Shared by every page section so spacing, width and headings stay identical. A component
+// Shared by every page section so spacing, width, headings and cards stay identical. A component
 // composes it with `styles: [sectionBase, css`...`]`.
 export const sectionBase = css`
   :host {
@@ -14,11 +14,22 @@ export const sectionBase = css`
     margin: 0 auto;
   }
 
+  /* The one card look. A section adds only what is its own (alignment, a badge, an avatar). */
+  .card {
+    /* The page's global box-sizing rule does not reach into shadow DOM. */
+    box-sizing: border-box;
+    padding: var(--space-lg);
+    background: var(--bg-surface);
+    border: var(--border-width) solid var(--border-base);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
   h2 {
     margin: 0 0 var(--space-lg);
     font-family: var(--font-heading);
     font-size: var(--text-2xl);
-    line-height: 1.2;
+    line-height: var(--leading-snug);
     color: var(--text-primary);
   }
 

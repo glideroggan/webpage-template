@@ -9,6 +9,7 @@ export interface NavLink {
 export interface Service {
   title: string;
   description: string;
+  details: string;
 }
 
 export interface Case {
@@ -32,6 +33,8 @@ export const titles = {
   cases: 'Case',
   team: 'Teamet',
   empty: 'Inget att visa ännu.',
+  readMore: 'Läs mer',
+  readLess: 'Visa mindre',
 };
 
 export const hero = {
@@ -43,9 +46,21 @@ export const hero = {
 };
 
 export const services: Service[] = [
-  { title: 'Tjänst ett', description: 'Kort beskrivning av tjänsten i en eller två meningar.' },
-  { title: 'Tjänst två', description: 'Kort beskrivning av tjänsten i en eller två meningar.' },
-  { title: 'Tjänst tre', description: 'Kort beskrivning av tjänsten i en eller två meningar.' },
+  {
+    title: 'Tjänst ett',
+    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
+    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
+  },
+  {
+    title: 'Tjänst två',
+    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
+    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
+  },
+  {
+    title: 'Tjänst tre',
+    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
+    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
+  },
 ];
 
 export const about = {

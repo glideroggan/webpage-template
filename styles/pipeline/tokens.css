@@ -1,0 +1,46 @@
+/*
+ * Pipeline (developer-first, dark): the page as a green test run. A terminal hero, a metrics
+ * bar, services as pipeline stages, cases as a changelog. Open index.html in this folder to see it.
+ *
+ * Fonts (add to <head> in the starter's index.html):
+ *   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+ *
+ * Dark only, like the mockup: these values go in the starter's dark block
+ * (@media (prefers-color-scheme: dark)). The starter's light :root block still applies in light
+ * mode, so give it matching light values too.
+ */
+:root {
+  /* Palette */
+  --bg: #0b1513;
+  --bg-raised: #12201d;
+  --line: #23413b;
+  --text: #e6f2ef;
+  --text-soft: #9db8b2;
+  --teal: #009d90;
+  --teal-bright: #3fd1c3;
+  --pass: #6ee7a8;
+  --warn: #f2b84b;
+  --fail: #ff6b6b;
+
+  /* Type */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+
+  /* The starter's tokens, mapped onto the palette */
+  --bg-app: var(--bg);
+  --bg-surface: var(--bg-raised);
+  --bg-surface-alt: var(--bg-raised);
+  --border-base: var(--line);
+  --text-primary: var(--text);
+  --text-secondary: var(--text-soft);
+  --text-muted: var(--text-soft);
+  --accent-primary: var(--teal);
+  --border-strong: var(--text-soft);
+  --accent-strong: var(--teal-bright);
+  --accent-strong-hover: #7ee3d9;
+  --accent-text: var(--teal-bright);
+  --accent-on-strong: #04120f;
+  --radius-md: 10px;
+  --radius-lg: 10px;
+}

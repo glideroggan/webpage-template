@@ -17,7 +17,7 @@ export const styles = [
 
     .text p {
       margin: 0 0 var(--space-md);
-      max-width: 40rem;
+      max-width: var(--text-width);
       color: var(--text-secondary);
     }
 
@@ -27,17 +27,10 @@ export const styles = [
       gap: var(--space-md);
     }
 
-    .fact {
-      padding: var(--space-lg);
-      background: var(--bg-surface);
-      border: 1px solid var(--border-base);
-      border-radius: var(--radius-lg);
-    }
-
     dt {
       font-family: var(--font-heading);
       font-size: var(--text-3xl);
-      font-weight: 700;
+      font-weight: var(--weight-bold);
       color: var(--accent-text);
     }
 

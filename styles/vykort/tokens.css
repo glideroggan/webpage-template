@@ -1,0 +1,47 @@
+/*
+ * Vykort (postcards): the page as a travel scrapbook. Tilted postcards, services as tickets,
+ * a route timeline, contact on the back of a postcard. Open index.html in this folder to see it.
+ *
+ * Fonts (add to <head> in the starter's index.html):
+ *   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&family=Open+Sans:wght@400;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+ *
+ * Light only, like the mockup: these values go in the starter's light :root block. The starter's
+ * dark block still applies in dark mode, so give it matching dark values too.
+ */
+:root {
+  /* Palette */
+  --sand: #f4ecdf;
+  --sand-deep: #e8dcc8;
+  --sea: #009d90;
+  --sea-deep: #00695f;
+  --night: #12303a;
+  --sun: #f2b84b;
+  --coral: #e86a4f;
+  --ink: #1e2a2e;
+  --ink-soft: #4f5d61;
+  --card: #fffdf8;
+
+  /* Type */
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --weight-bold: 900;
+  --leading-tight: 1.02;
+
+  /* The starter's tokens, mapped onto the palette */
+  --bg-app: var(--sand);
+  --bg-surface: var(--card);
+  --bg-surface-alt: var(--sand-deep);
+  --border-base: var(--sand-deep);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-muted: var(--ink-soft);
+  --accent-primary: var(--sea);
+  --border-strong: var(--ink-soft);
+  --accent-strong: var(--sea-deep);
+  --accent-strong-hover: #00544c;
+  --accent-text: var(--sea-deep);
+  --accent-on-strong: #ffffff;
+  --radius-md: 6px;
+  --shadow-sm: 0 10px 30px rgba(18, 48, 58, 0.18);
+}

@@ -7,31 +7,31 @@ export const styles = [
     :host {
       background: var(--hero-gradient);
       padding-top: calc(var(--space-3xl) + var(--space-xl));
-      padding-bottom: calc(var(--space-3xl) + var(--space-xl));
+      padding-bottom: var(--space-3xl);
     }
 
     .eyebrow {
       margin: 0 0 var(--space-sm);
       font-family: var(--font-heading);
       font-size: var(--text-sm);
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
       color: var(--accent-text);
     }
 
     h1 {
       margin: 0 0 var(--space-md);
-      max-width: 22ch;
+      max-width: var(--heading-width);
       font-family: var(--font-heading);
       font-size: var(--text-hero);
-      line-height: 1.1;
+      line-height: var(--leading-tight);
       color: var(--text-primary);
     }
 
     .lead {
       margin: 0 0 var(--space-xl);
-      max-width: 40rem;
+      max-width: var(--text-width);
       font-size: var(--text-lg);
       color: var(--text-secondary);
     }
@@ -47,9 +47,9 @@ export const styles = [
       padding: var(--space-sm) var(--space-lg);
       border-radius: var(--radius-md);
       font-family: var(--font-heading);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
       text-decoration: none;
-      border: 2px solid var(--accent-strong);
+      border: var(--border-width-strong) solid var(--accent-strong);
       transition: background var(--transition-fast);
     }
 

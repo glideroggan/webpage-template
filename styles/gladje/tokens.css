@@ -1,0 +1,46 @@
+/*
+ * Glädje (playful): big round shapes, chunky stickers and cards with hard shadows, a
+ * "Passar du här?" checklist, contact in a speech bubble. Open index.html in this folder to see it.
+ *
+ * Fonts (add to <head> in the starter's index.html):
+ *   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+ *
+ * Light only, like the mockup: these values go in the starter's light :root block. The starter's
+ * dark block still applies in dark mode, so give it matching dark values too.
+ */
+:root {
+  /* Palette */
+  --bg: #fffaf2;
+  --ink: #13201e;
+  --ink-soft: #4a5654;
+  --teal: #009d90;
+  --teal-ink: #00695f;
+  --mint: #c9f0ea;
+  --sun: #ffd166;
+  --coral: #ff7a66;
+  --lilac: #cdb8ff;
+  --card: #ffffff;
+
+  /* Type */
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+  --weight-bold: 900;
+
+  /* The starter's tokens, mapped onto the palette */
+  --bg-app: var(--bg);
+  --bg-surface: var(--card);
+  --bg-surface-alt: var(--mint);
+  --border-base: var(--ink);
+  --border-width: 3px;
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-muted: var(--ink-soft);
+  --accent-primary: var(--teal);
+  --border-strong: var(--ink);
+  --accent-strong: var(--teal-ink);
+  --accent-strong-hover: #00544c;
+  --accent-text: var(--teal-ink);
+  --accent-on-strong: #ffffff;
+  --radius-lg: 28px;
+  --shadow-sm: 6px 6px 0 var(--ink);
+}

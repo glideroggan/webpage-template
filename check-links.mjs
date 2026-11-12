@@ -1,7 +1,7 @@
 // Checks on the production build (run `npm run build` first) that every in-page link scrolls
-// to its section: menu links, the brand link, both hero buttons, and a direct /#contact load.
+// to its section: every menu link (clicked once, then again after scrolling up), the brand link,
+// both hero buttons, and a direct /#contact load.
 // The sections live in app-root's shadow root, so this guards against native anchors silently doing nothing.
-// Needs Playwright's Chromium: `npx playwright install chromium`.
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -56,7 +56,23 @@ const targetState = (page, id) =>
 
 const landed = (state) => state.found && (state.atBottom || (state.top >= -1 && state.top <= 120));
 
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+// Use whatever browser this machine has, so the check runs without `npx playwright install`:
+// Playwright's own Chromium, else Microsoft Edge, else the Chromium at CHROMIUM_PATH.
+const launchBrowser = async () => {
+  const options = [{}, { channel: 'msedge' }];
+  if (process.env.CHROMIUM_PATH) options.push({ executablePath: process.env.CHROMIUM_PATH });
+  const errors = [];
+  for (const option of options) {
+    try {
+      return await chromium.launch(option);
+    } catch (error) {
+      errors.push(error.message.split('\n')[0]);
+    }
+  }
+  throw new Error(`No browser found. Run \`npx playwright install chromium\`, install Edge or set CHROMIUM_PATH.\n${errors.join('\n')}`);
+};
+
+const browser = await launchBrowser();
 try {
   const open = async (hash = '') => {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
@@ -68,13 +84,31 @@ try {
     return { context, page };
   };
 
-  const navTargets = ['services', 'about', 'cases', 'team', 'contact'];
+  // The targets come from the rendered menu, so a section added to navLinks is checked too.
+  const navTargets = await (async () => {
+    const { context, page } = await open();
+    const ids = await page
+      .locator('app-root >> nav a[href^="#"]')
+      .evaluateAll((links) => links.map((a) => a.getAttribute('href').slice(1)));
+    await context.close();
+    return ids;
+  })();
+  check(navTargets.length > 0, `menu has in-page links (${navTargets.join(', ')})`);
+
   for (const id of navTargets) {
     const { context, page } = await open();
+    const link = page.locator(`app-root >> nav a[href="#${id}"]`);
     const before = await page.evaluate(() => window.scrollY);
-    await page.locator(`app-root >> nav a[href="#${id}"]`).click();
+    await link.click();
     const after = await settle(page);
     check(after > before && landed(await targetState(page, id)), `nav link #${id} scrolls to the section`);
+
+    // Clicking the link of the current hash again fires no hashchange; it must still scroll.
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await settle(page);
+    await link.click();
+    const again = await settle(page);
+    check(again > 0 && landed(await targetState(page, id)), `nav link #${id} scrolls again when clicked a second time`);
     await context.close();
   }
 
