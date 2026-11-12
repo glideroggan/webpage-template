@@ -12,7 +12,7 @@ FAST Element (web components). Page copy is Swedish placeholder text.
 | `npm run build` | Clean, type-check, bundle into `dist/` |
 | `npm run typecheck` | `tsc --noEmit` only |
 | `npm run screens` | Screenshots of `dist/` into `screens/` (build first) |
-| `npm run check:links` | Playwright check on `dist/`: nav links, hero buttons and a direct `/#contact` load scroll to their section (build first) |
+| `npm run check:links` | Playwright check on `dist/`: every menu link (read from the page, clicked once and again), hero buttons, the brand link and a direct `/#contact` load scroll to their section (build first) |
 
 Done means `npm run build` passes, and `npm run check:links` too when you touched navigation or `app-root`.
 
@@ -26,6 +26,7 @@ src/styles/           shared CSS, e.g. section-base.ts
 src/components/<name>/index.ts      class: state and behaviour
 src/components/<name>/template.ts   markup
 src/components/<name>/styles.ts     CSS
+styles/<name>/        example styles for the workshop (mockup + tokens.css); not part of the build
 ```
 
 `services-section` is the reference component. Read all three of its files before writing a new one.
@@ -60,17 +61,20 @@ src/components/<name>/styles.ts     CSS
    `value=` attribute, which is only read once.
 8. **`<form @submit>` is unreliable in shadow DOM**: use `type="button"` plus `@click` (see `contact-section`).
 9. **State is `@observable` (or `@attr` for values set from HTML)**. Plain fields do not update the view.
-10. **Hash links are resolved by `app-root`.** The sections live inside its shadow root, where the browser's #fragment lookup does not search, so `app-root/index.ts` scrolls to the id on `hashchange` and on load. Put the `id` on the section's host element (`<services-section id="services">`) in `app-root/template.ts`; never rely on native anchor scrolling. `npm run check:links` verifies it.
+10. **Hash links are resolved by `app-root`.** The sections live inside its shadow root, where the browser's #fragment lookup does not search, so `app-root/index.ts` scrolls to the id on `hashchange`, on load, and when a link to the current hash is clicked again. Put the `id` on the section's host element (`<services-section id="services">`) in `app-root/template.ts`; never rely on native anchor scrolling. `npm run check:links` verifies it.
 11. Components are shadow DOM. Global CSS does not reach in; tokens (custom properties) do.
 
 ## Styling rules
 
-- **Never hard-code a colour, spacing, radius, font or shadow in a component.** Use tokens from `index.html`:
-  `var(--space-md)`, `var(--text-secondary)`, `var(--radius-lg)`, `var(--font-heading)` and so on.
-  A new colour becomes a token in `index.html` first, with a dark value in the `prefers-color-scheme: dark` block.
-- Brand teal `#009D90` is `--accent-primary`: only for large shapes, borders and icons. Small text and
-  button fills use `--accent-text` / `--accent-strong` (darker, readable contrast).
-- Fonts: Montserrat for headings (`--font-heading`), Open Sans for body (`--font-body`).
+- **Never hard-code a colour, size, spacing, border width, radius, font, weight, line height or shadow in a
+  component.** Use tokens from `index.html`: `var(--space-md)`, `var(--text-secondary)`, `var(--radius-lg)`,
+  `var(--border-width)`, `var(--weight-semibold)`, `var(--font-heading)` and so on. A new value becomes a token
+  in `index.html` first; a new colour also gets a dark value in the `prefers-color-scheme: dark` block.
+  The only raw values are `100%`, grid fractions (`1fr`) and media-query breakpoints (CSS cannot read a token there).
+- The base look is neutral on purpose (system fonts, grey surfaces, a blue accent). Applying a style starts with
+  the token values in `index.html`; component changes it needs still use tokens only. See `styles/README.md`.
+- `--accent-primary` is only for borders, rings and large shapes. Small text and button fills use
+  `--accent-text` / `--accent-strong`, which keep at least 4.5:1 contrast.
 - Compose shared CSS: `export const styles = [sectionBase, css`...`];`.
 - Responsive: mobile works first (375 px). Use `auto-fit` grids and one `@media (max-width: 600px)` block per component.
 - Light and dark must both work. Check both with `npm run screens`.

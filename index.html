@@ -7,10 +7,6 @@
   <title>Ert företag - startsida</title>
   <link rel="icon" href="data:,">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -21,20 +17,28 @@
       font-family: var(--font-body);
       background: var(--bg-app);
       color: var(--text-primary);
-      line-height: 1.6;
+      line-height: var(--leading-body);
       -webkit-font-smoothing: antialiased;
     }
 
     /*
-     * Design tokens. Components never hard-code a colour, size or font: they read these
-     * custom properties, which cross shadow DOM boundaries. Re-theme by editing this block only.
+     * Design tokens. Components never hard-code a colour, size, border, font or shadow: they read
+     * these custom properties, which cross shadow DOM boundaries. Re-theme by editing this block only.
+     * The look is deliberately neutral (system fonts, grey surfaces, one plain blue accent), so a
+     * style from styles/ can replace these values without fighting an existing brand.
      */
     :root {
       color-scheme: light dark;
 
-      /* Typography */
-      --font-heading: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
-      --font-body: 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+      /* Typography: system fonts, so the page loads no web fonts until a style adds them. */
+      --font-heading: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --weight-semibold: 600;
+      --weight-bold: 700;
+      --leading-tight: 1.1;
+      --leading-snug: 1.2;
+      --leading-body: 1.6;
+      --tracking-wide: 0.08em;
       --text-xs: 0.75rem;
       --text-sm: 0.875rem;
       --text-base: 1rem;
@@ -54,69 +58,78 @@
       --space-2xl: 3rem;
       --space-3xl: 5rem;
       --content-width: 72rem;
+      --text-width: 40rem;
+      --form-width: 44rem;
+      --heading-width: 22ch;
       --badge-size: 2.25rem;
+      --avatar-size: 4rem;
       --card-min: 16rem;
+      --card-min-sm: 12rem;
       --header-offset: 4rem;
+      --z-header: 10;
 
       /* Shape and motion */
+      --border-width: 1px;
+      --border-width-strong: 2px;
       --border-accent: 4px;
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 12px;
       --radius-xl: 16px;
+      --radius-full: 50%;
       --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
       --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.12);
       --transition-fast: 150ms ease;
 
       /* Surfaces (light) */
-      --bg-app: #f4faf9;
+      --bg-app: #f6f7f9;
       --bg-surface: #ffffff;
-      --bg-surface-alt: #e6f4f2;
-      --border-base: #d3e4e1;
-      --border-strong: #a9c7c3;
+      --bg-surface-alt: #eef0f3;
+      --border-base: #d9dde3;
+      --border-strong: #b4bcc6;
 
       /* Text (light). --text-muted is at least 4.5:1 on every light surface. */
-      --text-primary: #0f1f1d;
-      --text-secondary: #34494a;
-      --text-muted: #4c6360;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted: #4b5563;
       --text-inverse: #ffffff;
 
       /*
-       * Brand teal. --accent-primary is the pure brand colour #009D90: use it for large
-       * shapes, borders and icons only. White text on it is about 3.4:1, which fails for
-       * small text, so small text and button fills use --accent-strong / --accent-text.
+       * Accent. --accent-primary is for borders, rings and large shapes; small text and button
+       * fills use --accent-text / --accent-strong, which keep at least 4.5:1 against their background.
        */
-      --accent-primary: #009d90;
-      --accent-strong: #00695f;
-      --accent-strong-hover: #00544c;
-      --accent-text: #00695f;
+      --accent-primary: #2563eb;
+      --accent-strong: #1d4ed8;
+      --accent-strong-hover: #1e40af;
+      --accent-text: #1d4ed8;
       --accent-on-strong: #ffffff;
       --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 45%, transparent);
 
-      --hero-gradient: linear-gradient(135deg, #e6f4f2 0%, #f4faf9 60%);
+      --hero-gradient: linear-gradient(180deg, #eef0f3 0%, #f6f7f9 100%);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg-app: #0b1514;
-        --bg-surface: #121f1e;
-        --bg-surface-alt: #0f2b28;
-        --border-base: #223836;
-        --border-strong: #35524f;
+        --bg-app: #0f1115;
+        --bg-surface: #171a21;
+        --bg-surface-alt: #1d212a;
+        --border-base: #2a2f3a;
+        --border-strong: #3d4452;
 
-        --text-primary: #e9f3f2;
-        --text-secondary: #bdd0ce;
-        --text-muted: #94adaa;
-        --text-inverse: #04120f;
+        --text-primary: #e5e7eb;
+        --text-secondary: #c4c9d2;
+        --text-muted: #9aa3b2;
+        --text-inverse: #0b1220;
 
-        --accent-strong: #009d90;
-        --accent-strong-hover: #12b3a5;
-        --accent-text: #3fd1c3;
-        --accent-on-strong: #04120f;
+        --accent-primary: #60a5fa;
+        --accent-strong: #3b82f6;
+        --accent-strong-hover: #60a5fa;
+        --accent-text: #93c5fd;
+        --accent-on-strong: #0b1220;
 
         --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
         --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.55);
-        --hero-gradient: linear-gradient(135deg, #0f2b28 0%, #0b1514 60%);
+        --hero-gradient: linear-gradient(180deg, #1d212a 0%, #0f1115 100%);
       }
     }
   </style>

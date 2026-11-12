@@ -10,7 +10,7 @@ export const styles = [
 
     .lead {
       margin: 0 0 var(--space-xl);
-      max-width: 40rem;
+      max-width: var(--text-width);
       color: var(--text-secondary);
     }
 
@@ -19,7 +19,7 @@ export const styles = [
       padding: var(--space-md);
       border-radius: var(--radius-md);
       background: var(--bg-surface);
-      border: 1px solid var(--accent-primary);
+      border: var(--border-width) solid var(--accent-primary);
       color: var(--text-primary);
     }
 
@@ -27,13 +27,13 @@ export const styles = [
       display: grid;
       gap: var(--space-md);
       grid-template-columns: 1fr 1fr;
-      max-width: 44rem;
+      max-width: var(--form-width);
     }
 
     label {
       display: grid;
       gap: var(--space-2xs);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
       color: var(--text-secondary);
     }
 
@@ -47,7 +47,7 @@ export const styles = [
       font: inherit;
       color: var(--text-primary);
       background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
+      border: var(--border-width) solid var(--border-strong);
       border-radius: var(--radius-md);
       padding: var(--space-sm);
     }
@@ -64,7 +64,7 @@ export const styles = [
       padding: var(--space-sm) var(--space-xl);
       font-family: var(--font-heading);
       font-size: var(--text-base);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
       color: var(--accent-on-strong);
       background: var(--accent-strong);
       border: none;

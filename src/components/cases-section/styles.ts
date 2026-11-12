@@ -16,7 +16,7 @@ export const styles = [
     .case {
       padding: var(--space-lg);
       background: var(--bg-surface);
-      border: 1px solid var(--border-base);
+      border: var(--border-width) solid var(--border-base);
       border-top: var(--border-accent) solid var(--accent-primary);
       border-radius: var(--radius-lg);
     }
@@ -24,7 +24,7 @@ export const styles = [
     .customer {
       margin: 0 0 var(--space-2xs);
       font-size: var(--text-sm);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
       color: var(--accent-text);
     }
 

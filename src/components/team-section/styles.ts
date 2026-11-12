@@ -10,14 +10,14 @@ export const styles = [
       padding: 0;
       display: grid;
       gap: var(--space-lg);
-      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(var(--card-min-sm), 1fr));
     }
 
     .member {
       padding: var(--space-lg);
       text-align: center;
       background: var(--bg-surface);
-      border: 1px solid var(--border-base);
+      border: var(--border-width) solid var(--border-base);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
     }
@@ -26,15 +26,15 @@ export const styles = [
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 4rem;
-      height: 4rem;
+      width: var(--avatar-size);
+      height: var(--avatar-size);
       margin-bottom: var(--space-md);
-      border-radius: 50%;
+      border-radius: var(--radius-full);
       background: var(--accent-strong);
       color: var(--accent-on-strong);
       font-family: var(--font-heading);
       font-size: var(--text-2xl);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
     }
 
     h3 {

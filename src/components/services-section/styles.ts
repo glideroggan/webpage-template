@@ -1,8 +1,9 @@
 import { css } from '@microsoft/fast-element';
 import { sectionBase } from '../../styles/section-base';
 
-// Only tokens (var(--...)) here, never raw colours or pixel sizes. The tokens are defined
-// in index.html and reach into the shadow DOM because custom properties inherit.
+// Only tokens (var(--...)) here: no raw colours, sizes, borders, weights or fonts. The tokens
+// are defined in index.html and reach into the shadow DOM because custom properties inherit.
+// The only raw values are 100% and media-query breakpoints, which CSS cannot read from a token.
 export const styles = [
   sectionBase,
   css`
@@ -24,7 +25,7 @@ export const styles = [
       cursor: pointer;
       padding: var(--space-lg);
       background: var(--bg-surface);
-      border: 1px solid var(--border-base);
+      border: var(--border-width) solid var(--border-base);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
       transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
@@ -52,11 +53,11 @@ export const styles = [
       width: var(--badge-size);
       height: var(--badge-size);
       margin-bottom: var(--space-md);
-      border-radius: 50%;
+      border-radius: var(--radius-full);
       background: var(--accent-strong);
       color: var(--accent-on-strong);
       font-family: var(--font-heading);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
     }
 
     h3 {

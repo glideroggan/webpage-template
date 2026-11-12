@@ -18,7 +18,7 @@ export const sectionBase = css`
     margin: 0 0 var(--space-lg);
     font-family: var(--font-heading);
     font-size: var(--text-2xl);
-    line-height: 1.2;
+    line-height: var(--leading-snug);
     color: var(--text-primary);
   }
 
