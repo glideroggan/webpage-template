@@ -2,7 +2,6 @@
 // to its section: every menu link (clicked once, then again after scrolling up), the brand link,
 // both hero buttons, and a direct /#contact load.
 // The sections live in app-root's shadow root, so this guards against native anchors silently doing nothing.
-// Needs Playwright's Chromium: `npx playwright install chromium`.
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -57,7 +56,23 @@ const targetState = (page, id) =>
 
 const landed = (state) => state.found && (state.atBottom || (state.top >= -1 && state.top <= 120));
 
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+// Use whatever browser this machine has, so the check runs without `npx playwright install`:
+// Playwright's own Chromium, else Microsoft Edge, else the Chromium at CHROMIUM_PATH.
+const launchBrowser = async () => {
+  const options = [{}, { channel: 'msedge' }];
+  if (process.env.CHROMIUM_PATH) options.push({ executablePath: process.env.CHROMIUM_PATH });
+  const errors = [];
+  for (const option of options) {
+    try {
+      return await chromium.launch(option);
+    } catch (error) {
+      errors.push(error.message.split('\n')[0]);
+    }
+  }
+  throw new Error(`No browser found. Run \`npx playwright install chromium\`, install Edge or set CHROMIUM_PATH.\n${errors.join('\n')}`);
+};
+
+const browser = await launchBrowser();
 try {
   const open = async (hash = '') => {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });

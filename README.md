@@ -15,8 +15,9 @@ npm run dev      # http://127.0.0.1:5080 with live reload, loopback only
 npm run build    # type-check and bundle into dist/
 ```
 
-`npm run screens` writes screenshots of `dist/` to `screens/` (375 and 1280 px, light and dark). It needs a
-Chromium for Playwright: `npx playwright install chromium`.
+`npm run screens` writes screenshots of `dist/` to `screens/` (375 and 1280 px, light and dark). It and
+`npm run check:links` use Playwright's own Chromium if it is installed, else Microsoft Edge, else the browser at
+`CHROMIUM_PATH`; on a machine with none of them, run `npx playwright install chromium`.
 
 `npm run check:links` loads `dist/` in Chromium and checks that every menu link (read from the page, clicked once
 and again), the hero buttons, the brand link and a direct `/#contact` load scroll to their section (build first).
