@@ -1,5 +1,7 @@
 import { css } from '@microsoft/fast-element';
 
+// The header reads --header-bg and --header-text, which every theme sets, so each theme decides its bar.
+// The brand, the link and the select all use --header-text on --header-bg: one pair to keep at 4.5:1.
 export const styles = css`
   :host {
     display: block;
@@ -9,8 +11,8 @@ export const styles = css`
     position: sticky;
     top: 0;
     z-index: var(--z-header);
-    background: var(--bg-surface);
-    border-bottom: var(--border-width) solid var(--border-base);
+    background: var(--header-bg);
+    color: var(--header-text);
   }
 
   .bar {
@@ -20,15 +22,15 @@ export const styles = css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-xs) var(--space-lg);
   }
 
   .brand {
+    margin-right: auto;
     font-family: var(--font-heading);
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
-    color: var(--accent-text);
+    color: var(--header-text);
     text-decoration: none;
   }
 
@@ -44,31 +46,48 @@ export const styles = css`
   nav a {
     display: inline-block;
     padding-block: var(--space-2xs);
-    color: var(--text-secondary);
+    color: var(--header-text);
     text-decoration: none;
     font-weight: var(--weight-semibold);
   }
 
   nav a:hover {
-    color: var(--accent-text);
+    text-decoration: underline;
+  }
+
+  .theme {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  select {
+    font: inherit;
+    padding: var(--space-2xs) var(--space-xs);
+    color: var(--header-text);
+    background: var(--header-bg);
+    border: var(--border-width) solid var(--header-text);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  /* The open list is drawn by the browser on a page-coloured surface, so it uses the page's text colours. */
+  option {
+    color: var(--text-primary);
+    background: var(--bg-surface);
+  }
+
+  /* The focus ring is drawn in the header text colour, which is the colour that contrasts with the bar. */
+  a:focus-visible,
+  select:focus-visible {
+    outline: var(--border-width-strong) solid var(--header-text);
+    outline-offset: var(--border-width-strong);
   }
 
   a:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
     border-radius: var(--radius-sm);
-  }
-
-  .footer {
-    border-top: var(--border-width) solid var(--border-base);
-    padding: var(--space-xl) var(--space-lg);
-    text-align: center;
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-  }
-
-  .footer p {
-    margin: 0;
   }
 
   @media (max-width: 600px) {

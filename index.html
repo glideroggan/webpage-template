@@ -7,6 +7,11 @@
   <title>Ert företag - startsida</title>
   <link rel="icon" href="data:,">
 
+  <!-- The default theme's font. Every other theme imports its own fonts from its file in src/themes/. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -22,32 +27,32 @@
     }
 
     /*
-     * Design tokens. Components never hard-code a colour, size, border, font or shadow: they read
-     * these custom properties, which cross shadow DOM boundaries. Re-theme by editing this block only.
-     * The look is deliberately neutral (system fonts, grey surfaces, one plain blue accent), so a
-     * style from styles/ can replace these values without fighting an existing brand.
+     * Design tokens: the default theme (Timesheet). Components never hard-code a colour, size, border,
+     * font or shadow: they read these custom properties, which cross shadow DOM boundaries.
+     * A theme in src/themes/<name>.css overrides them under :root[data-theme="<name>"], which beats both
+     * blocks below, so a theme looks the same whatever mode the system is in.
+     * Where a Timesheet colour misses this starter's contrast rules (4.5:1 for text, 3:1 for input
+     * borders), another Timesheet colour is used: --border-strong, --text-muted, --accent-strong and --header-bg.
      */
     :root {
       color-scheme: light dark;
 
-      /* Typography: system fonts, so the page loads no web fonts until a style adds them. */
-      --font-heading: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      /* Typography */
+      --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --weight-semibold: 600;
       --weight-bold: 700;
       --leading-tight: 1.1;
       --leading-snug: 1.2;
-      --leading-body: 1.6;
-      --tracking-wide: 0.08em;
+      --leading-body: 1.5;
       --text-sm: 0.875rem;
       --text-base: 1rem;
       --text-lg: 1.125rem;
       --text-xl: 1.25rem;
-      --text-2xl: 1.75rem;
+      --text-2xl: 1.5rem;
       --text-3xl: 2.25rem;
-      --text-hero: clamp(2rem, 6vw, 3.5rem);
 
-      /* Spacing */
+      /* Spacing (8px grid) */
       --space-2xs: 0.25rem;
       --space-xs: 0.5rem;
       --space-sm: 0.75rem;
@@ -55,15 +60,9 @@
       --space-lg: 1.5rem;
       --space-xl: 2rem;
       --space-2xl: 3rem;
-      --space-3xl: 5rem;
       --content-width: 72rem;
       --text-width: 40rem;
-      --form-width: 44rem;
-      --heading-width: 22ch;
-      --badge-size: 2.25rem;
-      --avatar-size: 4rem;
       --card-min: 16rem;
-      --card-min-sm: 9rem;
       --header-offset: 5rem;
       --z-header: 10;
 
@@ -73,56 +72,65 @@
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 12px;
-      --radius-full: 50%;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --transition-fast: 150ms ease;
 
       /* Surfaces (light) */
-      --bg-app: #f6f7f9;
+      --bg-app: #f1f5f9;
       --bg-surface: #ffffff;
-      --bg-surface-alt: #eef0f3;
-      --border-base: #d9dde3;
-      --border-strong: #7b8594;
+      --bg-surface-alt: #f8fafc;
+      --border-base: #e2e8f0;
+      /* Timesheet's #cbd5e1 is 1.5:1 on white; its muted text colour gives an input border 4.8:1. */
+      --border-strong: #64748b;
 
-      /* Text (light). --text-muted is at least 4.5:1 on every light surface. */
-      --text-primary: #111827;
-      --text-secondary: #374151;
-      --text-muted: #4b5563;
+      /* Text (light). Timesheet's muted #64748b is 4.3:1 on the page background, so muted uses its secondary. */
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #475569;
 
       /*
        * Accent. --accent-primary is for borders, rings and large shapes; small text and button
        * fills use --accent-text / --accent-strong, which keep at least 4.5:1 against their background.
+       * White on Timesheet's #6366f1 is 4.47:1, so fills use its hover indigo #4f46e5 (6.3:1).
        */
-      --accent-primary: #2563eb;
-      --accent-strong: #1d4ed8;
-      --accent-strong-hover: #1e40af;
-      --accent-text: #1d4ed8;
+      --accent-primary: #6366f1;
+      --accent-strong: #4f46e5;
+      --accent-strong-hover: #4f46e5;
+      --accent-text: #4f46e5;
       --accent-on-strong: #ffffff;
       --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 45%, transparent);
 
-      /* Built from the surface tokens, so it follows dark mode and any style that changes them. */
-      --hero-gradient: linear-gradient(180deg, var(--bg-surface-alt) 0%, var(--bg-app) 100%);
+      /* Header bar: every theme sets both. White on #4f46e5 is 6.3:1 (on #6366f1 it would be 4.47:1). */
+      --header-bg: #4f46e5;
+      --header-text: #ffffff;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg-app: #0f1115;
-        --bg-surface: #1f232c;
-        --bg-surface-alt: #161920;
-        --border-base: #2a2f3a;
-        --border-strong: #6b7383;
+        --bg-app: #0b0f19;
+        --bg-surface: #1e293b;
+        --bg-surface-alt: #334155;
+        --border-base: #334155;
+        /* Timesheet's #475569 is 1.9:1 on the dark surface; #64748b gives 3.1:1. */
+        --border-strong: #64748b;
 
-        --text-primary: #e5e7eb;
-        --text-secondary: #c4c9d2;
-        --text-muted: #9aa3b2;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        /* Timesheet's #64748b is 3.1:1 on the dark surface. */
+        --text-muted: #94a3b8;
 
-        --accent-primary: #60a5fa;
-        --accent-strong: #3b82f6;
-        --accent-strong-hover: #60a5fa;
-        --accent-text: #93c5fd;
-        --accent-on-strong: #0b1220;
+        --accent-primary: #818cf8;
+        --accent-strong: #818cf8;
+        --accent-strong-hover: #a5b4fc;
+        --accent-text: #a5b4fc;
+        --accent-on-strong: #0f172a;
 
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --header-bg: #0f172a;
+        --header-text: #f8fafc;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
       }
     }
   </style>

@@ -23,6 +23,8 @@ const ctx = await esbuild.context({
   outdir: 'dist',
   format: 'esm',
   target: 'es2021',
+  // Theme files (src/themes/*.css) are imported as text and injected by src/themes/index.ts.
+  loader: { '.css': 'text' },
   // Live reload: esbuild emits a "change" event on /esbuild after every rebuild. This
   // banner only exists in the dev bundle; build.mjs never adds it.
   banner: {

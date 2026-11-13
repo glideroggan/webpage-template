@@ -1,9 +1,11 @@
 import { html, repeat } from '@microsoft/fast-element';
 import type { NavLink } from '../../content';
+import type { Theme } from '../../themes';
 import type { AppRoot } from './index';
 
-// The page is this list of sections, top to bottom. The id sits on the section's host element;
-// app-root scrolls to it on hashchange, because the browser's #anchor lookup does not search shadow roots.
+// The page: a header with the brand, the menu and the theme select, then the sections. The id sits on
+// the section's host element; app-root scrolls to it on hashchange, because the browser's #anchor
+// lookup does not search shadow roots.
 export const template = html<AppRoot>/*html*/`
   <header class="header">
     <div class="bar">
@@ -13,17 +15,17 @@ export const template = html<AppRoot>/*html*/`
           ${repeat(x => x.links, html<NavLink>/*html*/`<li><a href="${x => x.href}">${x => x.label}</a></li>`)}
         </ul>
       </nav>
+      <label class="theme">
+        <span>${x => x.header.themeLabel}</span>
+        <select @change="${(x, c) => x.pickTheme(c.event)}">
+          ${repeat(x => x.themes, html<Theme, AppRoot>/*html*/`
+            <option value="${x => x.name}" :selected="${(x, c) => c.parent.theme === x.name}">${x => x.label}</option>
+          `)}
+        </select>
+      </label>
     </div>
   </header>
   <main id="top">
-    <hero-section></hero-section>
-    <services-section id="services"></services-section>
-    <about-section id="about"></about-section>
-    <cases-section id="cases"></cases-section>
-    <team-section id="team"></team-section>
-    <contact-section id="contact"></contact-section>
+    <kit-section id="exempel"></kit-section>
   </main>
-  <footer class="footer">
-    <p>${x => x.brand}. Platshållartext, byt ut i src/content.ts.</p>
-  </footer>
 `;

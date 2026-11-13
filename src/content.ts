@@ -6,100 +6,23 @@ export interface NavLink {
   href: string;
 }
 
-export interface Service {
-  title: string;
-  description: string;
-  details: string;
-}
-
-export interface Case {
-  title: string;
-  customer: string;
-  summary: string;
-}
-
 export const brandName = 'Ert företag';
 
-export const navLinks: NavLink[] = [
-  { label: 'Tjänster', href: '#services' },
-  { label: 'Om oss', href: '#about' },
-  { label: 'Case', href: '#cases' },
-  { label: 'Team', href: '#team' },
-  { label: 'Kontakt', href: '#contact' },
-];
+export const navLinks: NavLink[] = [{ label: 'Exempel', href: '#exempel' }];
 
-export const titles = {
-  services: 'Tjänster',
-  cases: 'Case',
-  team: 'Teamet',
-  empty: 'Inget att visa ännu.',
-  readMore: 'Läs mer',
-  readLess: 'Visa mindre',
+export const header = {
+  themeLabel: 'Tema',
 };
 
-export const hero = {
-  eyebrow: 'Platshållare',
-  title: 'Här står er viktigaste rubrik',
-  lead: 'En kort mening som förklarar vad ni gör och för vem. Byt ut texten i src/content.ts.',
-  primaryCta: { label: 'Kontakta oss', href: '#contact' },
-  secondaryCta: { label: 'Se våra tjänster', href: '#services' },
-};
-
-export const services: Service[] = [
-  {
-    title: 'Tjänst ett',
-    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
-    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
-  },
-  {
-    title: 'Tjänst två',
-    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
-    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
-  },
-  {
-    title: 'Tjänst tre',
-    description: 'Kort beskrivning av tjänsten i en eller två meningar.',
-    details: 'Mer om tjänsten: hur ni arbetar, vad kunden får och ett exempel.',
-  },
-];
-
-export const about = {
-  title: 'Om oss',
-  paragraphs: [
-    'Här berättar ni vilka ni är och vad ni brinner för. Två eller tre meningar räcker långt.',
-    'Ett andra stycke kan beskriva hur ni arbetar och vad kunden kan förvänta sig.',
-  ],
-  facts: [
-    { value: '00', label: 'år i branschen' },
-    { value: '00', label: 'nöjda kunder' },
-    { value: '00', label: 'genomförda projekt' },
-  ],
-};
-
-export const cases: Case[] = [
-  { title: 'Case ett', customer: 'Kund A', summary: 'Vad problemet var och vad ni levererade.' },
-  { title: 'Case två', customer: 'Kund B', summary: 'Vad problemet var och vad ni levererade.' },
-  { title: 'Case tre', customer: 'Kund C', summary: 'Vad problemet var och vad ni levererade.' },
-];
-
-export interface TeamMember {
-  name: string;
-  role: string;
-}
-
-export const team: TeamMember[] = [
-  { name: 'Förnamn Efternamn', role: 'Roll eller titel' },
-  { name: 'Förnamn Efternamn', role: 'Roll eller titel' },
-  { name: 'Förnamn Efternamn', role: 'Roll eller titel' },
-  { name: 'Förnamn Efternamn', role: 'Roll eller titel' },
-];
-
-export const contact = {
-  title: 'Kontakt',
-  lead: 'Berätta kort vad ni behöver hjälp med så hör vi av oss.',
-  nameLabel: 'Namn',
-  emailLabel: 'E-post',
-  messageLabel: 'Meddelande',
-  submitLabel: 'Skicka',
-  thanks: 'Tack! Det här är bara en demo, inget har skickats.',
+export const kit = {
+  title: 'Exempel',
+  lead: 'Så här ser rubriker, text, knappar, kort och formulärfält ut i det valda temat. Byt tema i menyn.',
+  primaryLabel: 'Primär knapp',
+  showDetails: 'Visa detaljer',
+  hideDetails: 'Dölj detaljer',
+  cardTitle: 'Ett kort',
+  cardText: 'Kort har yta, kant, rundning och skugga från temats tokens.',
+  cardDetails: 'Den här raden visas och döljs med den sekundära knappen.',
+  fieldLabel: 'Namn',
+  fieldPlaceholder: 'Förnamn Efternamn',
 };
