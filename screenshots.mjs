@@ -1,5 +1,5 @@
-// Screenshots of the production build (run `npm run build` first) at phone and desktop
-// width, light and dark, into screens/.
+// Screenshots of the production build (run `npm run build` first) into screens/, named
+// <theme>-<width>-<mode>.png: every theme at phone and desktop width, in each mode it supports.
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -8,6 +8,28 @@ import { chromium } from 'playwright';
 const DIST = path.resolve('dist');
 const OUT = path.resolve('screens');
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.map': 'application/json' };
+
+// Timesheet follows the system setting; the other themes have one mode each.
+const SHOTS = [
+  ['timesheet', 'light'],
+  ['timesheet', 'dark'],
+  ['vykort', 'light'],
+  ['redaktionell', 'light'],
+  ['pipeline', 'dark'],
+  ['gladje', 'light'],
+];
+
+// Focus screenshots: a light theme with a coloured bar and one with a light bar.
+const FOCUS_THEMES = ['timesheet', 'gladje'];
+// The focused element sits in app-root's shadow root (the select) or one level deeper (the kit button).
+const FOCUS_TARGETS = [
+  ['select', () => document.activeElement?.shadowRoot?.activeElement?.tagName === 'SELECT'],
+  [
+    'button',
+    () =>
+      document.activeElement?.shadowRoot?.activeElement?.shadowRoot?.activeElement?.classList.contains('primary') === true,
+  ],
+];
 
 // Static server bound to loopback only, closed when the screenshots are done.
 const server = http.createServer((req, res) => {
@@ -42,17 +64,52 @@ const launchBrowser = async () => {
 
 const browser = await launchBrowser();
 try {
-  for (const width of [375, 1280]) {
-    for (const scheme of ['light', 'dark']) {
-      const context = await browser.newContext({
-        viewport: { width, height: 900 },
-        colorScheme: scheme,
-      });
+  for (const [theme, scheme] of SHOTS) {
+    for (const width of [375, 1280]) {
+      const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme });
+      // The page reads the theme from localStorage on start, as after a visitor's own pick.
+      await context.addInitScript((name) => localStorage.setItem('theme', name), theme);
       const page = await context.newPage();
       await page.goto(url, { waitUntil: 'load' });
+      await page.waitForFunction(
+        (name) =>
+          name === 'timesheet'
+            ? !document.documentElement.hasAttribute('data-theme')
+            : document.documentElement.getAttribute('data-theme') === name &&
+              document.querySelector(`style[data-theme-styles="${name}"]`) !== null,
+        theme,
+        { timeout: 5000 },
+      );
+      // The theme's font @import starts only once its CSS is injected, so let it finish first.
+      await page.waitForLoadState('networkidle');
       await page.evaluate(() => document.fonts.ready);
-      const file = path.join(OUT, `${width}-${scheme}.png`);
+      const file = path.join(OUT, `${theme}-${width}-${scheme}.png`);
       await page.screenshot({ path: file, fullPage: true });
+      console.log(`wrote ${file}`);
+      await context.close();
+    }
+  }
+
+  // Keyboard focus, reached with Tab as a visitor would, so :focus-visible shows the real ring:
+  // <theme>-focus-<select|button>-1280-light.png.
+  for (const theme of FOCUS_THEMES) {
+    for (const [target, isTarget] of FOCUS_TARGETS) {
+      const context = await browser.newContext({ viewport: { width: 1280, height: 420 }, colorScheme: 'light' });
+      await context.addInitScript((name) => localStorage.setItem('theme', name), theme);
+      const page = await context.newPage();
+      await page.goto(url, { waitUntil: 'load' });
+      await page.waitForLoadState('networkidle');
+      await page.evaluate(() => document.fonts.ready);
+      let reached = false;
+      for (let i = 0; i < 10 && !reached; i++) {
+        await page.keyboard.press('Tab');
+        reached = await page.evaluate(isTarget);
+      }
+      if (!reached) throw new Error(`Tab never reached the ${target} in ${theme}`);
+      // The kit button animates its box-shadow (--transition-fast), so let the ring finish drawing.
+      await page.waitForTimeout(300);
+      const file = path.join(OUT, `${theme}-focus-${target}-1280-light.png`);
+      await page.screenshot({ path: file });
       console.log(`wrote ${file}`);
       await context.close();
     }

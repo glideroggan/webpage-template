@@ -14,6 +14,8 @@ const result = await esbuild.build({
   format: 'esm',
   target: 'es2021',
   metafile: true,
+  // Theme files (src/themes/*.css) are imported as text and injected by src/themes/index.ts.
+  loader: { '.css': 'text' },
 });
 
 // The entry is hashed so browsers never reuse a stale cached bundle; find its emitted

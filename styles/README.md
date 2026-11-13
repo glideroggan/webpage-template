@@ -1,36 +1,31 @@
-# Styles: pick one and ask your AI tool to apply it
+# Styles: mockups for inspiration
 
-The starter itself is deliberately plain: system fonts, grey surfaces, one blue accent. These four folders are
-examples of where you could take it. Each has:
+Each of the four workshop styles is already a theme in the starter: pick it in the "Tema" select in the header.
+Its colours and fonts live in `src/themes/<name>.css`. These folders hold a one-page mockup of each style
+(`index.html`, open it straight in the browser, no build needed) that shows where the layout could go.
 
-- `index.html`: a one-page mockup of the style. Open it straight in the browser (no build needed).
-- `tokens.css`: the style's colours and fonts, plus the starter's own token names mapped onto them.
+The mockup's layout (tilted postcards, ruled columns, a terminal hero) is optional: take as much of it as your
+team wants, or keep the starter's layout and only use the theme.
 
-The tokens give you the colours and fonts. The mockup's layout (tilted postcards, ruled columns, a terminal hero)
-is optional: take as much of it as your team wants, or keep the starter's layout and only change the tokens.
+| Folder | Style | Theme file | Mode |
+|--------|-------|------------|------|
+| [vykort/](vykort/index.html) | Postcards: a travel scrapbook with tilted cards, tickets and a route timeline | `src/themes/vykort.css` | Light only |
+| [redaktionell/](redaktionell/index.html) | Magazine: masthead, cover story, ruled columns, a serif display face | `src/themes/redaktionell.css` | Light only |
+| [pipeline/](pipeline/index.html) | Developer-first: a terminal hero, pipeline stages, a changelog | `src/themes/pipeline.css` | Dark only |
+| [gladje/](gladje/index.html) | Playful: big shapes, stickers, hard shadows, a speech-bubble contact | `src/themes/gladje.css` | Light only |
 
-| Folder | Style | Mode |
-|--------|-------|------|
-| [vykort/](vykort/index.html) | Postcards: a travel scrapbook with tilted cards, tickets and a route timeline | Light only |
-| [redaktionell/](redaktionell/index.html) | Magazine: masthead, cover story, ruled columns, a serif display face | Light only |
-| [pipeline/](pipeline/index.html) | Developer-first: a terminal hero, pipeline stages, a changelog | Dark only |
-| [gladje/](gladje/index.html) | Playful: big shapes, stickers, hard shadows, a speech-bubble contact | Light only |
-
-The starter supports both light and dark mode, so the other mode needs its own values (part of the step below).
 The mockups are made-up copy with no photos and no logo. They are not part of the build.
 
 ## Workshop step
 
-1. Open the four `index.html` files and pick one (or mix two).
+1. Open the four `index.html` files and switch between the themes in the starter. Pick one (or mix two).
 2. Ask your AI tool, for example:
 
-   > Apply the style in `styles/vykort/` to the starter. Put the values from `tokens.css` into the token block in
-   > `index.html`, add its font link, and give the dark-mode block matching values. Keep the starter's menu and
-   > sections. If you also change the layout to look like `styles/vykort/index.html`, follow AGENTS.md: tokens only
-   > in component CSS.
+   > Make the starter look like `styles/vykort/index.html`. Keep the theme in `src/themes/vykort.css` and follow
+   > AGENTS.md: tokens only in component CSS, new sections copied from `kit-section`.
 
-3. Run `npm run build`, `npm run check:links` and `npm run screens`, and look at the four screenshots in the
-   `screens/` folder (375 and 1280 px, light and dark).
+   Or make your own theme: see "Lägg till ett eget tema" in the main README.
+3. Run `npm run build`, `npm run check:links` and `npm run screens`, and look at the screenshots in the
+   `screens/` folder.
 
-Small text must stay readable: at least 4.5:1 contrast against its background in both modes, and input borders
-at least 3:1.
+Small text must stay readable: at least 4.5:1 contrast against its background, and input borders at least 3:1.

@@ -5,7 +5,7 @@ import { css } from '@microsoft/fast-element';
 export const sectionBase = css`
   :host {
     display: block;
-    padding: var(--space-3xl) var(--space-lg);
+    padding: var(--space-2xl) var(--space-lg);
     scroll-margin-top: var(--header-offset);
   }
 
@@ -14,7 +14,7 @@ export const sectionBase = css`
     margin: 0 auto;
   }
 
-  /* The one card look. A section adds only what is its own (alignment, a badge, an avatar). */
+  /* The one card look. A section adds only what is its own. */
   .card {
     /* The page's global box-sizing rule does not reach into shadow DOM. */
     box-sizing: border-box;
@@ -26,7 +26,7 @@ export const sectionBase = css`
   }
 
   h2 {
-    margin: 0 0 var(--space-lg);
+    margin: 0 0 var(--space-md);
     font-family: var(--font-heading);
     font-size: var(--text-2xl);
     line-height: var(--leading-snug);
@@ -35,7 +35,7 @@ export const sectionBase = css`
 
   @media (max-width: 600px) {
     :host {
-      padding: var(--space-2xl) var(--space-md);
+      padding: var(--space-xl) var(--space-md);
     }
   }
 `;

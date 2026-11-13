@@ -1,14 +1,16 @@
 /*
  * Redaktionell (magazine): the page as a printed issue. A masthead, a cover story, ruled
- * columns and a pull quote; calm, a serif display face, no cards. Open index.html in this folder to see it.
+ * columns and a pull quote; calm, a serif display face, no cards. styles/redaktionell/index.html shows
+ * the full mockup.
  *
- * Fonts (add to <head> in the starter's index.html):
- *   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
- *
- * Light only, like the mockup: these values go in the starter's light :root block. The starter's
- * dark block still applies in dark mode, so give it matching dark values too.
+ * Light only, like the mockup: color-scheme stays light and every colour is set here, so the page
+ * looks the same when the system is in dark mode.
  */
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Open+Sans:wght@400;600;700&display=swap');
+
+:root[data-theme="redaktionell"] {
+  color-scheme: light;
+
   /* Palette */
   --paper: #f7f4ee;
   --paper-deep: #efe9df;
@@ -32,13 +34,16 @@
   --text-primary: var(--ink);
   --text-secondary: var(--ink-soft);
   --text-muted: var(--ink-soft);
-  --accent-primary: var(--teal);
   --border-strong: var(--ink-soft);
   --accent-strong: var(--ink);
   --accent-strong-hover: var(--teal-ink);
   --accent-text: var(--teal-ink);
   --accent-on-strong: var(--paper);
+  /* The masthead: an ink bar with paper-coloured type. */
+  --header-bg: var(--ink);
+  --header-text: var(--paper);
   --radius-md: 0;
   --radius-lg: 0;
   --shadow-sm: none;
+  --shadow-md: none;
 }

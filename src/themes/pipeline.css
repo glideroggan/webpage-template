@@ -1,15 +1,15 @@
 /*
  * Pipeline (developer-first, dark): the page as a green test run. A terminal hero, a metrics
- * bar, services as pipeline stages, cases as a changelog. Open index.html in this folder to see it.
+ * bar, services as pipeline stages, cases as a changelog. styles/pipeline/index.html shows the full mockup.
  *
- * Fonts (add to <head> in the starter's index.html):
- *   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
- *
- * Dark only, like the mockup: these values go in the starter's dark block
- * (@media (prefers-color-scheme: dark)). The starter's light :root block still applies in light
- * mode, so give it matching light values too.
+ * Dark only, like the mockup: color-scheme stays dark and every colour is set here, so the page
+ * looks the same when the system is in light mode.
  */
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+:root[data-theme="pipeline"] {
+  color-scheme: dark;
+
   /* Palette */
   --bg: #0b1513;
   --bg-raised: #12201d;
@@ -25,22 +25,26 @@
   /* Type */
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-brand: var(--font-mono);
   --font-body: 'Open Sans', system-ui, sans-serif;
 
   /* The starter's tokens, mapped onto the palette */
   --bg-app: var(--bg);
   --bg-surface: var(--bg-raised);
-  --bg-surface-alt: var(--bg-raised);
+  --bg-surface-alt: var(--line);
   --border-base: var(--line);
   --text-primary: var(--text);
   --text-secondary: var(--text-soft);
   --text-muted: var(--text-soft);
-  --accent-primary: var(--teal);
   --border-strong: var(--text-soft);
   --accent-strong: var(--teal-bright);
   --accent-strong-hover: #7ee3d9;
   --accent-text: var(--teal-bright);
   --accent-on-strong: #04120f;
+  --header-bg: var(--bg-raised);
+  --header-text: var(--text);
   --radius-md: 10px;
   --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
