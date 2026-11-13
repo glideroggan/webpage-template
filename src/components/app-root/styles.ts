@@ -13,6 +13,8 @@ export const styles = css`
     z-index: var(--z-header);
     background: var(--header-bg);
     color: var(--header-text);
+    /* A hairline, so a bar close to the page colour still reads as a bar. */
+    border-bottom: var(--border-width) solid var(--border-base);
   }
 
   .bar {
@@ -27,7 +29,7 @@ export const styles = css`
 
   .brand {
     margin-right: auto;
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     color: var(--header-text);
@@ -93,6 +95,17 @@ export const styles = css`
   @media (max-width: 600px) {
     .bar {
       padding: var(--space-xs) var(--space-md);
+    }
+
+    /* Big enough to hit with a thumb. */
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--touch-target);
+    }
+
+    select {
+      min-height: var(--touch-target);
     }
   }
 `;

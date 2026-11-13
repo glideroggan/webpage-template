@@ -26,6 +26,7 @@
   --font-heading: 'Montserrat', system-ui, sans-serif;
   --font-body: 'Open Sans', system-ui, sans-serif;
   --font-hand: 'Caveat', cursive;
+  --font-brand: var(--font-hand);
   --weight-bold: 900;
   --leading-tight: 1.02;
 

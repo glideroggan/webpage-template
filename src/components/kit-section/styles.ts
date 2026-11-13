@@ -12,6 +12,7 @@ export const styles = [
       max-width: var(--text-width);
       margin: 0 0 var(--space-lg);
       color: var(--text-secondary);
+      text-wrap: pretty;
     }
 
     .actions {

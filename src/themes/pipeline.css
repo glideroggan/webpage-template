@@ -25,6 +25,7 @@
   /* Type */
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-brand: var(--font-mono);
   --font-body: 'Open Sans', system-ui, sans-serif;
 
   /* The starter's tokens, mapped onto the palette */

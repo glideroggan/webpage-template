@@ -242,14 +242,24 @@ try {
   }
 
   {
-    // A stored value that is not a theme falls back to the default instead of loading anything.
+    // A stored value that is not a theme falls back to the default without even trying to load it:
+    // the name guard rejects it first. A failed load would also end on the default, but it logs an
+    // error ("could not be loaded"), so no such error is the proof that the guard ran. Other console
+    // errors (a web font blocked offline) do not count.
     const context = await browser.newContext({ viewport: { width: 1280, height: 360 } });
     await context.addInitScript(() => localStorage.setItem('theme', '../not-a-theme'));
     const page = await context.newPage();
+    const errors = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error' && message.text().includes('could not be loaded')) errors.push(message.text());
+    });
+    page.on('pageerror', (error) => errors.push(error.message));
     await page.goto(url, { waitUntil: 'load' });
     await rendered(page);
+    await page.waitForTimeout(300);
     const look = await readLook(page);
     check(look.theme === null && look.injected.length === 0 && look.selected === DEFAULT_THEME, `an unknown stored theme falls back to ${DEFAULT_THEME}`);
+    check(errors.length === 0, `an unknown stored theme is rejected before any load is tried (console errors: ${JSON.stringify(errors)})`);
     await context.close();
   }
 } finally {

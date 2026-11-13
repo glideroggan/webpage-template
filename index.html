@@ -40,6 +40,8 @@
       /* Typography */
       --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      /* The brand in the header; a theme can give it its signature face (Vykort's hand, Pipeline's mono). */
+      --font-brand: var(--font-heading);
       --weight-semibold: 600;
       --weight-bold: 700;
       --leading-tight: 1.1;
@@ -64,6 +66,8 @@
       --text-width: 40rem;
       --card-min: 16rem;
       --header-offset: 5rem;
+      /* Minimum height of a tap target on a phone (the header link and select). */
+      --touch-target: 2.5rem;
       --z-header: 10;
 
       /* Shape and motion */
@@ -92,14 +96,19 @@
       /*
        * Accent. --accent-primary is for borders, rings and large shapes; small text and button
        * fills use --accent-text / --accent-strong, which keep at least 4.5:1 against their background.
-       * White on Timesheet's #6366f1 is 4.47:1, so fills use its hover indigo #4f46e5 (6.3:1).
+       * White on Timesheet's #6366f1 is 4.47:1, so fills use its hover indigo #4f46e5 (6.3:1) and
+       * hover one step darker, #4338ca (7.9:1).
        */
       --accent-primary: #6366f1;
       --accent-strong: #4f46e5;
-      --accent-strong-hover: #4f46e5;
+      --accent-strong-hover: #4338ca;
       --accent-text: #4f46e5;
       --accent-on-strong: #ffffff;
-      --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 45%, transparent);
+      /*
+       * Opaque, so the ring keeps at least 3:1 against the page in every theme: a 1px gap in the page
+       * colour, then 3px of --accent-text. Built from tokens, so each theme gets its own ring.
+       */
+      --focus-ring: 0 0 0 1px var(--bg-app), 0 0 0 4px var(--accent-text);
 
       /* Header bar: every theme sets both. White on #4f46e5 is 6.3:1 (on #6366f1 it would be 4.47:1). */
       --header-bg: #4f46e5;
@@ -126,8 +135,9 @@
         --accent-text: #a5b4fc;
         --accent-on-strong: #0f172a;
 
-        --header-bg: #0f172a;
-        --header-text: #f8fafc;
+        /* The indigo bar stays in dark mode, a deep indigo that sets the bar apart from the page. */
+        --header-bg: #312e81;
+        --header-text: #ffffff;
 
         --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
         --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);

@@ -12,7 +12,7 @@ one menu link, a "Tema" select) and one "Exempel" block with each kit element; t
 | `npm run dev` | Dev server with live reload on http://127.0.0.1:5080 (loopback only). Start it only when you need to look at the page. |
 | `npm run build` | Clean, type-check, bundle into `dist/` |
 | `npm run typecheck` | `tsc --noEmit` only |
-| `npm run screens` | Screenshots of `dist/` into `screens/<theme>-<width>-<mode>.png`: every theme at 375 and 1280 px in each mode it supports (build first) |
+| `npm run screens` | Screenshots of `dist/` into `screens/<theme>-<width>-<mode>.png`: every theme at 375 and 1280 px in each mode it supports, plus Tab focus on the select and the primary button (`<theme>-focus-<select\|button>-1280-light.png`) (build first) |
 | `npm run check:links` | Playwright check on `dist/`: every menu link (read from the page, clicked once and again), the brand link and a direct `/#exempel` load reach their target, and every theme in the select changes the background, header and kit button and survives a reload (build first) |
 
 Done means `npm run build` passes, and `npm run check:links` too when you touched navigation, `app-root`, a theme
@@ -98,7 +98,9 @@ styles/<name>/        mockup pages for the workshop's styles, for inspiration; n
 - Compose shared CSS: `export const styles = [sectionBase, css`...`];`.
 - Responsive: mobile works first (375 px). Use `auto-fit` grids and one `@media (max-width: 600px)` block per component.
 - Light and dark must both work in the default theme. Check every theme with `npm run screens`.
-- Every interactive element needs a visible `:focus-visible` style and must be reachable by keyboard.
+- Every interactive element needs a visible `:focus-visible` style and must be reachable by keyboard. Use
+  `box-shadow: var(--focus-ring)` (opaque, at least 3:1 against the page); in the header, an outline in
+  `--header-text`.
 
 ## Do not
 

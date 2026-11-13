@@ -32,8 +32,10 @@ and the kit's button and is still there after a reload (build first).
 2. Byt selektorn till `:root[data-theme="mitt"]` och ändra färger, typsnitt (`@import` överst) och
    `color-scheme` (`light` eller `dark`). Sätt alla färg-tokens, även `--header-bg` och `--header-text`.
 3. Lägg till en rad i listan `themes` i `src/themes/index.ts`: `{ name: 'mitt', label: 'Mitt tema' },`.
-4. Kör `npm run build` och välj temat i menyn. Text ska ha minst 4.5:1 kontrast mot bakgrunden och
-   inmatningsfältens kanter minst 3:1.
+4. Lägg till namnet i listan `THEMES` i `check-links.mjs` och en rad i `SHOTS` i `screenshots.mjs`
+   (`['mitt', 'light']`), annars fallerar `npm run check:links` på temalistan.
+5. Kör `npm run build`, `npm run check:links` och `npm run screens`, och välj temat i menyn. Text ska ha minst
+   4.5:1 kontrast mot bakgrunden, inmatningsfältens kanter och fokusringen minst 3:1.
 
 The mockup pages in [`styles/`](styles/README.md) show where each workshop style could take the layout; they are
 inspiration and not part of the build.
