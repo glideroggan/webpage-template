@@ -16,6 +16,11 @@ const types = { '.html': 'text/html', '.js': 'text/javascript', '.map': 'applica
 // The themes the header select must offer, in this order; the first is the default.
 const THEMES = ['timesheet', 'vykort', 'redaktionell', 'pipeline', 'gladje'];
 const DEFAULT_THEME = THEMES[0];
+// The default theme's computed colours (index.html): page background, header bar, primary button.
+const DEFAULT_LOOK = {
+  light: { background: 'rgb(241, 245, 249)', header: 'rgb(79, 70, 229)', button: 'rgb(79, 70, 229)' },
+  dark: { background: 'rgb(11, 15, 25)', header: 'rgb(49, 46, 129)', button: 'rgb(129, 140, 248)' },
+};
 
 // Static server bound to loopback only, closed when the checks are done.
 const server = http.createServer((req, res) => {
@@ -201,6 +206,12 @@ try {
       `${colorScheme}: the theme select offers ${THEMES.join(', ')} (found ${base.options.join(', ') || 'none'})`,
     );
     check(showsTheme(base, base, DEFAULT_THEME), `${colorScheme}: a first visit shows ${DEFAULT_THEME}`);
+    // The base above is the page itself, so pin the default's own colours too: page, indigo header, button.
+    const expected = DEFAULT_LOOK[colorScheme];
+    check(
+      base.background === expected.background && base.header === expected.header && base.button === expected.button,
+      `${colorScheme}: a first visit has ${DEFAULT_THEME}'s colours (expected ${JSON.stringify(expected)}, found ${JSON.stringify({ background: base.background, header: base.header, button: base.button })})`,
+    );
     await context.close();
 
     // Each theme from a fresh visit, then the default again from a page that had another theme.
