@@ -91,8 +91,8 @@ styles/<name>/        mockup pages for the workshop's styles, for inspiration; n
 - The default theme (Timesheet's tokens and its Manrope font) is in `index.html` and follows the system's light or
   dark mode. Every other theme is one file in `src/themes/`; components never check which theme is active.
 - The header uses `--header-bg` and `--header-text` only; every theme sets both.
-- `--accent-primary` is only for borders, rings and large shapes. Small text and button fills use
-  `--accent-text` / `--accent-strong`, which keep at least 4.5:1 contrast.
+- Accent text and button fills use `--accent-text` / `--accent-strong`, which keep at least 4.5:1
+  contrast.
 - Contrast: text at least 4.5:1 against its background, input borders at least 3:1, in every theme and mode.
   Check a new colour pair with a short node script (WCAG relative luminance) before using it.
 - Compose shared CSS: `export const styles = [sectionBase, css`...`];`.

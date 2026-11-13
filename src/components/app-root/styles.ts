@@ -13,8 +13,11 @@ export const styles = css`
     z-index: var(--z-header);
     background: var(--header-bg);
     color: var(--header-text);
-    /* A hairline, so a bar close to the page colour still reads as a bar. */
-    border-bottom: var(--border-width) solid var(--border-base);
+    /*
+     * A hairline, so a bar close to the page colour still reads as a bar. Drawn as an inset shadow, so a
+     * theme with a thicker --border-width does not make its header taller.
+     */
+    box-shadow: inset 0 calc(-1 * var(--border-width)) 0 var(--border-base);
   }
 
   .bar {
@@ -25,12 +28,16 @@ export const styles = css`
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-xs) var(--space-lg);
+    /* One line height for the whole bar, so its height does not depend on the theme's body leading. */
+    line-height: var(--leading-snug);
   }
 
   .brand {
     margin-right: auto;
     font-family: var(--font-brand);
-    font-size: var(--text-lg);
+    font-size: var(--brand-size);
+    /* A theme may give the brand a bigger size; line-height 1 keeps the bar from growing with it. */
+    line-height: 1;
     font-weight: var(--weight-bold);
     color: var(--header-text);
     text-decoration: none;
@@ -66,6 +73,9 @@ export const styles = css`
   }
 
   select {
+    /* A fixed height with the border inside, so a theme's thicker border does not grow the bar. */
+    box-sizing: border-box;
+    height: var(--space-xl);
     font: inherit;
     padding: var(--space-2xs) var(--space-xs);
     color: var(--header-text);
@@ -106,6 +116,11 @@ export const styles = css`
 
     select {
       min-height: var(--touch-target);
+    }
+
+    /* The select wraps to a second row; right-aligned, it lines up with the menu link above it. */
+    .theme {
+      margin-left: auto;
     }
   }
 `;

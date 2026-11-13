@@ -36,7 +36,6 @@
   --text-primary: var(--ink);
   --text-secondary: var(--ink-soft);
   --text-muted: var(--ink-soft);
-  --accent-primary: var(--teal);
   --border-strong: var(--ink);
   --accent-strong: var(--teal-ink);
   --accent-strong-hover: #00544c;
