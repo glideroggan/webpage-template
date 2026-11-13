@@ -106,6 +106,8 @@ try {
         reached = await page.evaluate(isTarget);
       }
       if (!reached) throw new Error(`Tab never reached the ${target} in ${theme}`);
+      // The kit button animates its box-shadow (--transition-fast), so let the ring finish drawing.
+      await page.waitForTimeout(300);
       const file = path.join(OUT, `${theme}-focus-${target}-1280-light.png`);
       await page.screenshot({ path: file });
       console.log(`wrote ${file}`);
